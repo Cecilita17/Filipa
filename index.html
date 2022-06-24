@@ -173,14 +173,14 @@
             <hr>
             
             <p>PRECIO</p>
-            <form onsubmit="return false" class="precioRange d-flex flex-column">
-                <label for="rangeSlider_inversed">Mínimo:</label>
-                <input id="rangeSlider_inversed" type="range" min="5000" max="100000" value="5000">
-                <output>5000</output>
+            <form onsubmit="return false" id="formRange" class="precioRange d-flex flex-column">
+                <label for="slider1">Mínimo:</label>
+                <input id="slider1" type="range" min="500" max="1000" value="1000">
+                <output id="outputMin">500</output>
 
-                <label for="rangeSlider">Máximo:</label>
-                <input id="rangeSlider" type="range" min="5000" max="70000" value="70000">
-                <output>70000</output>
+                <label for="slider2">Máximo:</label>
+                <input id="slider2" type="range" min="5000" max="10000" value="10000">
+                <output id="outputMax">5000</output>
                 <input class="boton btn" type="submit" value="Aplicar">
             </form>
           </div>

@@ -9,7 +9,7 @@ const talleTodos = document.getElementById ("talleTodos")
 
 
 
-//filtro
+//filtro radio
 
 //antes
 /* function myFunction (){
@@ -56,8 +56,43 @@ function validarFormulario(e){
     e.preventDefault()
     myFunction()
 }
-
 form.addEventListener("submit", validarFormulario) 
+
+
+//filtro rangeSlider
+const slider2 = document.getElementById("slider2");
+const slider1 = document.getElementById("slider1");
+const outputMin = document.getElementById("outputMin")
+const outputMax = document.getElementById("outputMax")
+
+slider2.oninput = function(){
+    outputMax.innerHTML = this.value;
+}
+
+slider1.oninput = function(){
+    outputMin.innerHTML = this.value;
+}
+
+
+//lo que no me sale
+function validarFormRange(e){
+    e.preventDefault()
+    const rangeS = document.querySelectorAll('input[type="range"]');
+        
+    /* for (let i = 0; i < talle.length; i++){
+        if (stockProductos.precio > rangeS[0].output) {
+            let arrayNuevo1 = stockProductos.filter((item) => item.precio > rangeS[0].value)
+            mostrarProductos(arrayNuevo1)
+        }else if (stockProductos.precio < rangeS[1].output) {
+            let arrayNuevo2 = stockProductos.filter((item) => item.precio < rangeS[1].value)
+            mostrarProductos(arrayNuevo2)
+        }
+    } */
+}
+
+const formRange = document.getElementById("formRange");
+formRange.addEventListener("submit", validarFormRange )
+
 
 //buscando
 mostrarProductos(stockProductos);
