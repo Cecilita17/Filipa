@@ -10,23 +10,14 @@ const talleTodos = document.getElementById ("talleTodos")
 
 
 //filtro
-/* talleTodos.addEventListener("click", ()=>{
-    if ($("talleTodos").is(":checked")) {
-        mostrarProductos(stockProductos)
-    }else{
-        let stockFiltrado = stockProductos.filter(item => item.talle == "talleS" || item.talle == "talleM" || item.talle == "talleL"  )
-    
-        mostrarProductos(stockFiltrado)
-    }
-}) */
 
-
-function myFunction (){
+//antes
+/* function myFunction (){
     let talle = document.form[0]
     let txt = "";
     let i;
 
-    for (let i = 0; i < talle.lengtht; i++) {
+    for (let i = 0; i < talle.length; i++) {
         
         if (talle[i].checked){
             
@@ -38,6 +29,25 @@ function myFunction (){
         }
     }
 
+} */
+
+
+//despues
+function myFunction (){
+    let talle = document.querySelectorAll('[name="talle"]');
+    console.log(talle);
+
+    for (let i = 0; i < talle.length; i++) {
+        if (talle[i].checked){
+            console.log(talle[i].value);
+            if (talle[i].value === "todos") {
+                mostrarProductos(stockProductos);
+            }else{
+                let stockFiltrado = stockProductos.filter((item) => item.talle === talle[i].value);
+                mostrarProductos(stockFiltrado)
+            } 
+        }
+    }
 }
 
 
@@ -54,7 +64,7 @@ mostrarProductos(stockProductos);
 
 //logica ecommerce
 function mostrarProductos(array){
-    
+    contenedorProductos.innerHTML=""
     for (const el of array) {
         let div = document.createElement("div");
         div.className = "producto card-color m-3"
