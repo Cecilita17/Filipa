@@ -1,38 +1,23 @@
+let carritoCompras = [];
+
 const contenedorProductos = document.getElementById("contenedor-productos");
+const contenedorCarrito = document.getElementById("carrito-contenedor")
+
 const talles = document.getElementById("talles");
 const submit = document.getElementById("submit");
+
 const form = document.getElementById("form");
 const L = document.getElementById("talleL")
 const M = document.getElementById("talleM")
 const S = document.getElementById("talleS")
 const talleTodos = document.getElementById ("talleTodos")
 
+const contadorCarrito = document.getElementById('contador-carrito');
+const precioTotal = document.getElementById('precioTotal');
+
 
 
 //filtro radio
-
-//antes
-/* function myFunction (){
-    let talle = document.form[0]
-    let txt = "";
-    let i;
-
-    for (let i = 0; i < talle.length; i++) {
-        
-        if (talle[i].checked){
-            
-            mostrarProductos(stockProductos)
-        }else{
-            let stockFiltrado = stockProductos.filter(item => item.talle == talle[i] )
-        
-            mostrarProductos(stockFiltrado)
-        }
-    }
-
-} */
-
-
-//despues
 function myFunction (){
     let talle = document.querySelectorAll('[name="talle"]');
     console.log(talle);
@@ -49,8 +34,6 @@ function myFunction (){
         }
     }
 }
-
-
 
 function validarFormulario(e){
     e.preventDefault()
@@ -75,11 +58,11 @@ slider1.oninput = function(){
 
 
 //lo que no me sale
-function validarFormRange(e){
+/* function validarFormRange(e){
     e.preventDefault()
     const rangeS = document.querySelectorAll('input[type="range"]');
         
-    /* for (let i = 0; i < talle.length; i++){
+    for (let i = 0; i < talle.length; i++){
         if (stockProductos.precio > rangeS[0].output) {
             let arrayNuevo1 = stockProductos.filter((item) => item.precio > rangeS[0].value)
             mostrarProductos(arrayNuevo1)
@@ -87,11 +70,11 @@ function validarFormRange(e){
             let arrayNuevo2 = stockProductos.filter((item) => item.precio < rangeS[1].value)
             mostrarProductos(arrayNuevo2)
         }
-    } */
+    }
 }
 
 const formRange = document.getElementById("formRange");
-formRange.addEventListener("submit", validarFormRange )
+formRange.addEventListener("submit", validarFormRange ) */
 
 
 //buscando
@@ -108,12 +91,52 @@ function mostrarProductos(array){
                             <h2 class="card-title">${el.nombre}</h2>
                             <p class="card-text">${el.precio}</p>
                             <p>${el.talle}</p>
-                            <a href="#" id="${el.id}" class="btn boton">Seleccionar</a>
+                            <a id="boton${el.id}" class="btn boton">Agregar</a>
                         </div>`;
-                        
         
         contenedorProductos.appendChild(div)
+
+        let btnAgregar = document.getElementById(`boton${el.id}`)
+
+        btnAgregar.addEventListener("click", () =>{
+            console.log(el.id);
+            agregarAlCarrito(el.id);
+        })
     }
     
 }
 
+function agregarAlCarrito(id){
+    let yaExiste = carritoCompras.find(element => element.id === id)
+    if(yaExiste){
+        //alert("El producto seleccionado ya está en el carrito")
+        yaExiste.cantidad = yaExiste.cantidad + 1
+        document.getElementById(`cantidad${yaExiste.id}`).innerHTML = `<p id="cantidad${yaExiste.id}">cantidad: ${yaExiste.cantidad}</p>`
+        actualizarCarrito()
+
+        
+    }else{
+        let productoAgregar = stockProductos.find(ele => ele.id === id)
+        //console.log(productoAgregar);
+        productoAgregar.cantidad = 1
+        carritoCompras.push(productoAgregar)
+        actualizarCarrito()
+        mostrarCarrito(productoAgregar)
+    }
+}
+
+function mostrarCarrito(productoAgregar) {
+    let div = document.createElement('div')
+    div.classList.add('productoEnCarrito')
+    div.innerHTML = `<p>${productoAgregar.nombre}</p>
+                    <p>Precio: $${productoAgregar.precio}</p>
+                    <p id="cantidad${productoAgregar.id}">Cantidad: ${productoAgregar.cantidad}</p>
+                    <button class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>`
+    contenedorCarrito.appendChild(div)
+}
+
+function actualizarCarrito(){
+    contadorCarrito.innerText = carritoCompras.reduce((acc,el) => acc + el.cantidad, 0)
+    precioTotal.innerText = carritoCompras.reduce((acc,el)=> acc + (el.precio * el.cantidad), 0)
+
+}
