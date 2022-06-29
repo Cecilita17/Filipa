@@ -68,7 +68,7 @@ body{
   }
 
   .buscar-box{
-    background-color: none;
+    background-color: white;
     width: 60px;
     margin-right: 0%;
     padding: 0%;
@@ -516,8 +516,8 @@ header nav a img{
 .footer{
   grid-area: footer;
   background-color: rgb(172, 117, 117);
-  min-height: auto;
-  width: 100%;
+  height: auto;
+  min-width: 100%;
   color: rgb(219, 216, 216);
 }
 
