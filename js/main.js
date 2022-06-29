@@ -56,25 +56,16 @@ slider1.oninput = function(){
     outputMin.innerHTML = this.value;
 }
 
-
-//lo que no me sale
-/* function validarFormRange(e){
+function validarFormRange(e){
     e.preventDefault()
-    const rangeS = document.querySelectorAll('input[type="range"]');
-        
-    for (let i = 0; i < talle.length; i++){
-        if (stockProductos.precio > rangeS[0].output) {
-            let arrayNuevo1 = stockProductos.filter((item) => item.precio > rangeS[0].value)
-            mostrarProductos(arrayNuevo1)
-        }else if (stockProductos.precio < rangeS[1].output) {
-            let arrayNuevo2 = stockProductos.filter((item) => item.precio < rangeS[1].value)
-            mostrarProductos(arrayNuevo2)
-        }
-    }
+    let valorMin = slider1.value;
+    let valorMax = slider2.value;
+    let filtroPrecio = stockProductos.filter(producto => producto.precio >= valorMin && producto.precio <= valorMax);
+    mostrarProductos(filtroPrecio)
 }
 
 const formRange = document.getElementById("formRange");
-formRange.addEventListener("submit", validarFormRange ) */
+formRange.addEventListener("submit", validarFormRange )
 
 
 //buscando
