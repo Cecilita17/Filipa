@@ -26,10 +26,10 @@
             <a class="logo1 d-flex justify-self-start align-self-start navbar-brand ms-4" href="#"><img src="img/logo-small.png"  alt=""></a>
                       
             <div class="buscar-carrito">
-              <div class="collapse navbar-collapsed d-flex justify-content-between me-4" id="navbarSupportedContent">
+              <div class="hijo-buscar-carrito collapse navbar-collapsed d-flex justify-content-between me-4" id="navbarSupportedContent">
                 
                 <form class="borde-abajo form-inline my-2 my-lg-0 d-flex justify-self-end ">
-                  <input class="buscar-box form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                  <input class="buscar-box form-control form-control-sm mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
                   <button class="btn buscar my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
               </div>
@@ -44,12 +44,14 @@
                 <button id="boton-carrito" class="btn buscar carrito d-flex align-items-center"><i class="fa-solid fa-cart-shopping"></i> <span id="contador-carrito">0</span></button>
               </div>
 
-              <button class="mobile-nav-toggle"><i class="fa-solid fa-bars"></i></button>
+              <button id="nav-toggle" class="mobile-nav-toggle"><i class="fa-solid fa-bars"></i></button>
             </div>
             
           </nav>
 
-          <nav class="desktop2 navBajo ">
+          <nav id="nav2" class="desktop2 navBajo ">
+            <button id="nav-toggle-cerrar" class="mobile-nav-toggle"><i class="fa-solid fa-xmark fa-3"></i></button>
+
             <div class="dropdown">
               <button class="dropbtn">Inicio</button>
               <div class="dropdown-content ">
@@ -136,15 +138,15 @@
                 <div id="talles" class="talless">
                   <div>
                     <input type="radio" id="talleL" value="L" name="talle">
-                    <label for="L">large</label>
+                    <label for="L">Grande </label>
                   </div>
                   <div>
                     <input type="radio" id="talleM" value="M" name="talle">
-                    <label for="M">medium</label>
+                    <label for="M">Mediano </label>
                   </div>
                   <div>
                     <input type="radio" id="talleS" value="S" name="talle">
-                    <label for="S">small</label>
+                    <label for="S">Pequeño </label>
                   </div>
                   <div>
                     <input type="radio" id="talleTodos" value="todos" name="talle">
@@ -353,7 +355,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <!--link a mi js-->
     <script src="./js/stock.js"></script>
-    <script src="./js/modal.js"></script>
+    <script src="./js/toggle.js"></script>
     <script src="./js/main.js"></script>
 </body>
 

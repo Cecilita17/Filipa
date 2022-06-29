@@ -22,6 +22,11 @@ body{
      
 }
 
+.visible{
+  visibility: hidden;
+  transform: none !important;
+}
+
 @media only screen and (max-width: 700px){
   .containerr{
     position: relative;
@@ -47,12 +52,36 @@ body{
     box-shadow: -1px 10px 42px -24px rgba(0,0,0,0.75);
   }
   .desktop2{
-    display: none !important;
+    position: fixed;
+    inset: 0 0 0 25%;
+    background: rgb(172, 117, 117, 0.4) !important; 
+    backdrop-filter: blur(1rem) !important;
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 30px;
+    padding-left: 8%;
+    -webkit-box-shadow: -1px 10px 42px -24px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 10px 42px -24px rgba(0,0,0,0.75);
+    box-shadow: -1px 10px 42px -24px rgba(0,0,0,0.75);
+    transition: transform 350ms ease-out;
+    transform: translateX(100%) ;
+    
   }
+  
+  .desktop2 button i{
+    position: absolute;
+    top: 2rem;
+    left: 55%;
+    font-size: 35px;
+  }
+  .dropbtn{
+    background-color: transparent !important;
+  }
+
   .desktop1{
     background-color: white !important;
     flex-wrap: nowrap;
-    justify-content: space-between !important;
+    justify-content: center !important;
     align-items: center !important;
     margin: 1%;
     padding: 1%;
@@ -64,7 +93,12 @@ body{
     width: fit-content;
     margin-left: 1%;
     padding: 5px;
-    margin: 0%;
+    margin: 0% !important;
+    background-color: transparent !important;
+    border: none;
+  }
+  .logo1 img{
+    padding-top: 20px;
   }
 
   .buscar-box{
@@ -78,11 +112,19 @@ body{
     padding: none !important;
     margin: none !important;
   }
-
+  .buscar i{
+    font-size: 20px !important;
+  }
   .buscar-carrito{
-    gap: 5px !important;
+    gap: 0px !important;
     margin-right: 10px !important;
-
+    
+  }
+  .buscar-carrito i{
+    font-size: 25px;
+  }
+  .hijo-buscar-carrito{
+    margin: 0% !important;
   }
   .pCarrito span{
     display: none;
@@ -91,6 +133,7 @@ body{
   .mobile-nav-toggle{
     border: 0;
     background-color: white;
+    font-size: 25px;
   }
   .fa-bars{
     display: inline;
@@ -151,7 +194,72 @@ body{
     display: flex;
     align-items: center;
   }
+
+  /*modal*/
+.modal-contenedor {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  opacity: 0;
+  visibility: hidden;
 }
+
+.modal-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 5;
+}
+
+.modal-carrito {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between ;
+  position: relative;
+  background-color: white;
+  border: 1px solid rgb(225, 76, 65);
+  min-width: 350px !important;
+  min-height: 600px !important;
+  padding: 20px;
+  margin-top: -100%;
+  transition: all 0.5s;
+}
+
+.modal-active .modal-carrito {
+  margin-top: 0;
+}
+
+.modal-carrito h3 {
+  color: rgb(170, 96, 96);
+  padding-bottom: 5px;
+  text-align: center;
+}
+.modal-carrito #carritoCerrar {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  color: rgb(170, 96, 96);
+  border: none;
+  background-color: white;
+}
+.modal-carrito #carritoCerrar:hover {
+  cursor: pointer;
+}
+.modal-carrito #carritoCerrar:focus {
+  outline: none;
+}
+.modal-carrito .precioProducto {
+  padding-top: 10px;
+}
+}
+
+/* Min 700px*/
 
 
 @media only screen and (min-width: 700px){
@@ -189,7 +297,7 @@ header{
   width: 25%;
 }
 header nav a img{
-  background-color: #313837 !important;
+  background-color: transparent !important;
 }
 .buscar-carrito{
   display: flex;
