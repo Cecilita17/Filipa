@@ -38,6 +38,7 @@ body{
                           "footer";
   }
   header{
+    background-color: white;
     position: fixed;
     width: 100% !important;
     margin-right: 10px;
@@ -49,6 +50,7 @@ body{
     display: none !important;
   }
   .desktop1{
+    background-color: white;
     flex-wrap: nowrap;
     justify-content: space-between !important;
     align-items: center !important;
@@ -66,7 +68,7 @@ body{
   }
 
   .buscar-box{
-    
+    background-color: white;
     width: 60px;
     margin-right: 0%;
     padding: 0%;
@@ -185,6 +187,9 @@ header{
 
 .logo{
   width: 25%;
+}
+header nav a img{
+  background-color: #313837 !important;
 }
 .buscar-carrito{
   display: flex;
