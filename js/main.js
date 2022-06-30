@@ -15,7 +15,7 @@ const talleTodos = document.getElementById ("talleTodos")
 const contadorCarrito = document.getElementById('contador-carrito');
 const precioTotal = document.getElementById('precioTotal');
 
-
+window.addEventListener("DOMContentLoaded", agregarAlCarrito)
 
 //filtro radio
 function myFunction (){
@@ -52,9 +52,13 @@ slider2.oninput = function(){
     outputMax.innerHTML = this.value;
 }
 
-slider1.oninput = function(){
+/* slider1.oninput = function(){
     outputMin.innerHTML = this.value;
-}
+} */
+
+slider1.addEventListener("input",(e)=>{
+    outputMin.innerHTML = e.target.value;
+})
 
 function validarFormRange(e){
     e.preventDefault()
@@ -91,43 +95,81 @@ function mostrarProductos(array){
 
         btnAgregar.addEventListener("click", () =>{
             console.log(el.id);
-            agregarAlCarrito(el.id);
+            agregarAlStorage(el.id);
         })
     }
     
 }
 
-function agregarAlCarrito(id){
-    let yaExiste = carritoCompras.find(element => element.id === id)
-    if(yaExiste){
-        //alert("El producto seleccionado ya está en el carrito")
-        yaExiste.cantidad = yaExiste.cantidad + 1
-        document.getElementById(`cantidad${yaExiste.id}`).innerHTML = `<p id="cantidad${yaExiste.id}">cantidad: ${yaExiste.cantidad}</p>`
-        actualizarCarrito()
+contenedorCarrito.addEventListener("click", (e)=>{
+    if(e.target.id === "eliminar"){
+        borrarProducto(e.target.dataset.id)
+        
+    }
+})
+
+function borrarProducto(id){
+    let productoBorrar = JSON.parse(localStorage.getItem(id))
+    let productoOriginal = stockProductos.find(producto => producto.id === parseInt(id))
+    if(productoBorrar.cantidad > 1 ){
+        productoBorrar.cantidad = productoBorrar.cantidad -1 
+        productoBorrar.precio = productoBorrar.precio - productoOriginal.precio
+        localStorage.setItem(`${id}`, JSON.stringify(productoBorrar))
+    }else{
+        localStorage.removeItem(id)
+    }
+    agregarAlCarrito()
+}
+
+
+function agregarAlStorage(id){
+    let productoStorage = JSON.parse(localStorage.getItem(id))
+    let productoAgregar = stockProductos.find(ele => ele.id === id)
+
+    if(productoStorage === null){
+        localStorage.setItem(`${id}`, JSON.stringify({...productoAgregar, cantidad:1}))
+        agregarAlCarrito()
 
         
     }else{
-        let productoAgregar = stockProductos.find(ele => ele.id === id)
-        //console.log(productoAgregar);
-        productoAgregar.cantidad = 1
-        carritoCompras.push(productoAgregar)
-        actualizarCarrito()
-        mostrarCarrito(productoAgregar)
+        productoStorage.cantidad = productoStorage.cantidad + 1 
+        productoStorage.precio = productoStorage.precio + productoAgregar.precio
+        localStorage.setItem(`${id}`, JSON.stringify(productoStorage))
+        agregarAlCarrito()
+
     }
 }
 
-function mostrarCarrito(productoAgregar) {
-    let div = document.createElement('div')
-    div.classList.add('productoEnCarrito')
-    div.innerHTML = `<p>${productoAgregar.nombre}</p>
-                    <p>Precio: $${productoAgregar.precio}</p>
-                    <p id="cantidad${productoAgregar.id}">Cantidad: ${productoAgregar.cantidad}</p>
-                    <button class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>`
-    contenedorCarrito.appendChild(div)
+function agregarAlCarrito (){
+    carritoCompras.length = 0
+    for (let index = 0; index < localStorage.length; index++) {
+        let key = localStorage.key(index)
+        typeof JSON.parse(localStorage.getItem(key)) == "object" && carritoCompras.push(JSON.parse(localStorage.getItem(key)))
+    }
+    mostrarCarrito()
+    actualizarTotalesCarrito()
 }
 
-function actualizarCarrito(){
-    contadorCarrito.innerText = carritoCompras.reduce((acc,el) => acc + el.cantidad, 0)
-    precioTotal.innerText = carritoCompras.reduce((acc,el)=> acc + (el.precio * el.cantidad), 0)
+function mostrarCarrito() {
+    contenedorCarrito.innerHTML = ""
+    carritoCompras.forEach(producto => {
+        console.log(producto.id);
+        contenedorCarrito.innerHTML += `<p>${producto.nombre}</p>
+        <p>Precio: $${producto.precio}</p>
+        <p>Cantidad: ${producto.cantidad}</p>
+        <button class="boton-eliminar"><i id="eliminar" data-id="${producto.id}" class="fas fa-trash-alt"></i></button>`
+    })
+}
+
+
+function actualizarTotalesCarrito(){
+    if (carritoCompras.length > 0) {
+        contadorCarrito.innerText = carritoCompras.reduce((cdadTotal,{cantidad}) => cdadTotal + cantidad, 0)
+        precioTotal.innerText = `El precio total es: $${carritoCompras.reduce((precioTotal,{precio})=> precioTotal + precio , 0)}` 
+    }else{
+        contadorCarrito.innerText = ""
+        precioTotal.innerText = `Usted no posee productos en el carrito`
+    }
+    
 
 }
