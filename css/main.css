@@ -22,6 +22,24 @@ body{
      
 }
 
+.container-login{
+  position: relative;
+  background-color: white;
+  height: 100vh;
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr; ; 
+  grid-template-rows: auto; 
+  grid-template-areas: "header"
+                        "login"
+                        "footer";
+}
+
+/*login*/
+.login{
+  grid-area: login;
+}
+
 .visible{
   visibility: hidden;
   transform: none !important;
@@ -42,6 +60,8 @@ body{
                           " main"
                           "footer";
   }
+
+
   header{
     background-color: white;
     position: fixed;
@@ -107,6 +127,7 @@ body{
     margin-right: 0%;
     padding: 0%;
   }
+  
   .buscar{
     
     padding: none !important;
@@ -312,6 +333,11 @@ header nav a img{
   border: none;
 }
 
+.form-control:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
 .borde-abajo{
   border-bottom: 1px solid black ;
 }
@@ -429,7 +455,8 @@ header nav a img{
 /* Dropdown Button */
 .dropbtn {
   background-color: rgb(170, 96, 96);
-  color: black;
+  color: white;
+  text-shadow: 2px 2px 12px #250F0B;
   margin-right: 25px;
   margin-left: 25px;
   margin-bottom: 10px;
