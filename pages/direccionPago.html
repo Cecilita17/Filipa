@@ -144,66 +144,77 @@
         </section>
 
         <section>
-            <div class="envio-pago-html">
-                <div class="tabs">
-                  <button id="tab-1" class="envio tab-button tab-button--active" data-for-tab="1">1. ENVIO</button>
-
-                  <button id="tab-2" class="pago tab-button tab-button--active" data-for-tab="2">2. PAGO</button>
+          <div class="envio-pago-html">
+              <div class="tabs">
+                <button id="tab-1" class="envio tab-button tab-button--active" data-for-tab="1">1. ENVIO</button>
+      
+                <button id="tab-2" class="pago tab-button tab-button--active" data-for-tab="2">2. PAGO</button>
+              </div>
+      
+              <div class="tab-content tab-content--active" id="datos-envio-htm" data-tab="1">
+                <p>Contacto</p>
+                <div class="group">
+                    <label for="nombre" class="label"><i class="fa fa-user"></i>Nombre</label>
+                    <input id="nombre" type="text" class="input">
                 </div>
-
-                <div class="datos-envio-htm tab-content tab-content--active" id="datos-envio-htm" data-tab="1">
-                  <p>Contacto</p>
-                  <div class="group">
-                      <label for="nombre" class="label">Nombre</label>
-                      <input id="nombre" type="text" class="input">
-                  </div>
-                  <div class="group">
-                      <label for="email" class="label">Email</label>
-                      <input id="email-envio" type="email" class="input" data-type="email-de-envio">
-                  </div>
-                  <div class="group">
-                      <label for="direccion" class="label"> direccion</label>
-                      <input id="direccion" type="text" class="input" >
-                  </div>
-                  <div class="group">
-                      <label for="telefono" class="label">Teléfono</label>
-                      <input id="tel-envio" type="number" class="input" data-type="tel-de-envio">
-                  </div>
-                  <div class="group">
-                      <input type="submit" id="enviar-envio" class="btn boton" value="Enviar">
-                  </div>
-                  <div class="hr"></div>
-                  
-              </div>
-
-              <div class="datos-pago-htm tab-content" id="datos-pago-htm" data-tab="2">
-                <p>Tab 2</p>
-                  <!-- <div class="group">
-                      <label for="user" class="label">Usuario</label>
-                      <input id="userRegis" type="text" class="input">
-                  </div>
-                  <div class="group">
-                      <label for="pass" class="label">Contraseña</label>
-                      <input id="passRegis" type="password" class="input" data-type="password">
-                  </div>
-                  <div class="group">
-                      <label for="pass" class="label">Repetir contraseña</label>
-                      <input id="rePassRegis" type="password" class="input" data-type="password">
-                  </div>
-                  <div class="group">
-                      <label for="pass" class="label">Email</label>
-                      <input id="email" type="text" class="input">
-                  </div>
-                  <div class="group">
-                      <input type="submit" id="registro" class="button"  value="Registrarse">
-                  </div>
-                  <div class="hr"></div>
-                  <div class="foot-lnk">
-                      <label for="tab-1">Ya eres miembro?</a>
-                  </div> -->
-              </div>
+                <div class="group">
+                    <label for="email" class="label"><i class="fa fa-envelope"></i>Email</label>
+                    <input id="email-envio" type="email" class="input" data-type="email-de-envio">
+                </div>
+                <div class="group">
+                    <label for="direccion" class="label"><i class="fa fa-address-card-o"></i> direccion</label>
+                    <input id="direccion" type="text" class="input" >
+                </div>
+                <div class="group">
+                    <label for="telefono" class="label"><i class="fa fa-phone" aria-hidden="true"></i>Teléfono</label>
+                    <input id="tel-envio" type="number" class="input" data-type="tel-de-envio">
+                </div>
+                <div class="group">
+                    <input type="submit" id="enviar-envio" class="btn boton" value="Enviar">
+                </div>
+                <div class="hr"></div>
+                
             </div>
-        </section>
+      
+            <div class="tab-content" id="datos-pago-htm" data-tab="2">
+              <p>Pago</p>
+              <label for="fname" class="accepCards">Tarjetas que aceptamos</label>
+              <div class="icon-container">
+                  <i class="fa fa-cc-visa" style="color:navy;"></i>
+                  <i class="fa fa-cc-amex" style="color:blue;"></i>
+                  <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                  <i class="fa fa-cc-discover" style="color:orange;"></i>
+              </div>
+
+              <div class="group">
+                  <label for="nombre" class="label">Nombre del titular</label>
+                  <input id="nombre" type="text" class="input" placeholder="Nombre">
+              </div>
+              <div class="group">
+                  <label for="tarjeta" class="label">Numero de tarjeta</label>
+                  <input id="tarjeta-credito" type="number" class="input" placeholder="1111 2222 3333 4444">
+              </div>
+              <div class="group">
+                  <label for="mesVenc" class="label"> Mes de vencimiento</label>
+                  <input id="mes-venc" type="text" class="input" placeholder="septiembre">
+              </div>
+              <div class="divGroup">
+                  <div class="group">
+                      <label for="AnioVenc" class="label">Año de vencimiento</label>
+                      <input id="año-venc" type="number" class="input2" placeholder="2027">
+                  </div>
+                  <div class="group">
+                      <label for="cvv" class="label">CVV</label>
+                      <input id="cvv" type="number" class="input2" placeholder="123">
+                  </div>
+              </div>
+              <div class="group">
+                  <input type="submit" id="enviar-envio" class="btn boton" value="Enviar">
+              </div>
+              <div class="hr"></div>
+            </div>
+          </div>
+      </section>
       </main> 
 
         <!--FOOTER-->

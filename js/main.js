@@ -214,8 +214,10 @@ function actualizarTotalesCarrito(){
 
 }
 
+
 //Envio y pago tabs
 function setUpTabs() {
+    
     document.querySelectorAll(".tab-button").forEach(button =>{
         button.addEventListener("click", ()=> {
             
@@ -232,7 +234,11 @@ function setUpTabs() {
             envioPago.querySelectorAll(".tab-content").forEach(tab => {
                 tab.classList.remove("tab-content--active")
             })
+
+            button.classList.add("tab-button--active")
+            tabToActivate.classList.add("tab-content--active")
         })
+
     })
 }
 

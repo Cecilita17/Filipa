@@ -770,6 +770,11 @@ header nav a img{
 }
 .mainPago section{
   height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 9%;
 }
 
 .mainPago section:first-of-type{
@@ -777,56 +782,15 @@ header nav a img{
   border-left: 1px solid grey;
   height: 600px;
 }
-.envio-pago-html{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 9%;
-}
+
 .tabs{
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0;
-  width: 100%;
+  width: 550px;
   
-}
-.tab{
-  padding: 5px;
-  text-align: center;
-  font-size: 1.2rem;
-}
-.tab:first-of-type{
-  padding-right: 5%;
-}
-
-.envio, .pago{
-  width: 50%;
-  padding: 5px;
-  color: #979494;
-  background-color: white;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid grey ;
-}
-
-.datos-envio-htm{
-  height: auto;
-  width: 500px;
-  padding: 5%;
-  
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
-
-.datos-envio-htm p{
-  font-size: 2rem;
-}
+}  
 .group{
   display: flex;
   flex-direction: column;
@@ -835,26 +799,87 @@ header nav a img{
   width: 400px;
 }
 
-/* .tab-button:active{
-  
-  border-bottom: 3px solid #250F0B;
-  padding-top: 5px;
-  outline: none;
-  cursor: pointer;
-} */
 .tab-button{
-  background-color: #313837;
+  width: 50%;
+  height: 50px;
+  padding: 5px;
+  color: #979494;
+  background-color: white;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid grey ;
 }
 .tab-button--active{
-  background-color: pink;
+  width: 50%;
+  height: 50px;
+  background-color: rgb(170, 96, 96);
+  color: black;
+  
 }
 
 .tab-content{
   display: none;
 }
 .tab-content--active{
-  display: block;
+  display: flex;
+  gap:25px;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  width: 550px;
+  height: 600px;
+  background-color: white;
+  
 }
+.tab-content--active > div, p, input, .accepCards{
+  
+  padding-left: 11%;
+}
+
+.tab-content--active > p{
+  margin-top: 4%;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.tab-content--active > div, label{
+  font-size: 1rem;
+  font-weight: 500;
+  
+}
+
+.tab-content--active > div i{
+  font-size: 25px;
+}
+.tab-content--active > .icon-container{
+  width: 400px;
+  display: flex;
+  gap: 30px;
+  
+}
+.tab-content--active > div input{
+  height: 45px;
+  margin-top: 2%;
+  font-size: 1.2rem;
+  border: 1px solid rgb(180, 178, 178);
+}
+
+.tab-content--active > div{
+  display: flex;
+  align-items: flex-start;
+}
+
+.tab-content--active > .divGroup{
+  display: flex;
+  width: 200px;
+}
+.tab-content--active > .input2{
+  height: 45px;
+  margin-top: 2%;
+  font-size: 1.2rem;
+  width: 200px;
+}
+
 
 /*FOOTER*/
 .footer{
