@@ -12,10 +12,15 @@ const M = document.getElementById("talleM")
 const S = document.getElementById("talleS")
 const talleTodos = document.getElementById ("talleTodos")
 
+const divPagar = document.getElementById("divPagar")
+
 const contadorCarrito = document.getElementById('contador-carrito');
 const precioTotal = document.getElementById('precioTotal');
 
+const suCompraContenedor = document.getElementById("su-compra-contenedor")
+
 window.addEventListener("DOMContentLoaded", agregarAlCarrito)
+
 
 //filtro radio
 function myFunction (){
@@ -117,8 +122,10 @@ function borrarProducto(id){
         localStorage.setItem(`${id}`, JSON.stringify(productoBorrar))
     }else{
         localStorage.removeItem(id)
+        divPagar.innerHTML = ""
     }
     agregarAlCarrito()
+    
 }
 
 
@@ -132,6 +139,7 @@ function agregarAlStorage(id){
 
         
     }else{
+        productoStorage.cantidad = 0
         productoStorage.cantidad = productoStorage.cantidad + 1 
         productoStorage.precio = productoStorage.precio + productoAgregar.precio
         localStorage.setItem(`${id}`, JSON.stringify(productoStorage))
@@ -150,14 +158,40 @@ function agregarAlCarrito (){
     actualizarTotalesCarrito()
 }
 
+
+
 function mostrarCarrito() {
     contenedorCarrito.innerHTML = ""
     carritoCompras.forEach(producto => {
         console.log(producto.id);
-        contenedorCarrito.innerHTML += `<p>${producto.nombre}</p>
-        <p>Precio: $${producto.precio}</p>
-        <p>Cantidad: ${producto.cantidad}</p>
-        <button class="boton-eliminar"><i id="eliminar" data-id="${producto.id}" class="fas fa-trash-alt"></i></button>`
+        contenedorCarrito.innerHTML += `<div class="divCarrito">
+                                            <img src="${producto.img}" class="imgCarrito mt-2 card-img-top" alt="...">
+                                            <div><hr></div>
+                                            <div class="divCarritoLadoImagen">
+                                                <p class="productoNombre"> ${producto.nombre}</p>
+                                                <div>
+                                                    <p>Precio: $${producto.precio}</p>
+                                                    <p>Cantidad: ${producto.cantidad}</p>
+                                                    <button class="boton-eliminar"><i id="eliminar" data-id="${producto.id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
+                                                </div>
+                                            </div>
+                                        </div>`
+
+            //agregar items del carrito a pagina de envio/pago
+            
+        /* suCompraContenedor.innerHTML += `<div class="divCarrito">
+                                            <img src="${producto.img}" class="imgCarrito mt-2 card-img-top" alt="...">
+                                            <div><hr></div>
+                                            <div class="divCarritoLadoImagen">
+                                                <p class="productoNombre"> ${producto.nombre}</p>
+                                                <div>
+                                                    <p>Precio: $${producto.precio}</p>
+                                                    <p>Cantidad: ${producto.cantidad}</p>
+                                                    <button class="boton-eliminar"><i id="eliminar" data-id="${producto.id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
+                                                </div>
+                                            </div>
+                                        </div>` */
+
     })
 }
 
@@ -165,11 +199,43 @@ function mostrarCarrito() {
 function actualizarTotalesCarrito(){
     if (carritoCompras.length > 0) {
         contadorCarrito.innerText = carritoCompras.reduce((cdadTotal,{cantidad}) => cdadTotal + cantidad, 0)
-        precioTotal.innerText = `El precio total es: $${carritoCompras.reduce((precioTotal,{precio})=> precioTotal + precio , 0)}` 
+        precioTotal.innerText = `Precio total: $${carritoCompras.reduce((precioTotal,{precio})=> precioTotal + precio , 0)}`
+        divPagar.innerHTML = `<a href="">Seguir comprando</a>
+         <a href="../pages/direccionPago.html"><button class="boton btn">Pagar</button></a> ` 
     }else{
         contadorCarrito.innerText = ""
-        precioTotal.innerText = `Usted no posee productos en el carrito`
+        precioTotal.innerHTML = `<div class="modalP">
+                                    <p> Tu carrito de compras está vacío </p>
+                                     <a href="./index.html"> Volver a la tienda</a>
+                                </div>`
+        
     }
     
 
 }
+
+//Envio y pago tabs
+function setUpTabs() {
+    document.querySelectorAll(".tab-button").forEach(button =>{
+        button.addEventListener("click", ()=> {
+            
+            const tabsContainer = button.parentElement;
+            const envioPago = tabsContainer.parentElement
+            const tabNumber = button.dataset.forTab;
+            const tabToActivate = envioPago.querySelector(`.tab-content[data-tab="${tabNumber}"]`);
+
+
+            tabsContainer.querySelectorAll(".tab-button").forEach(button => {
+                button.classList.remove("tab-button--active")
+            })
+
+            envioPago.querySelectorAll(".tab-content").forEach(tab => {
+                tab.classList.remove("tab-content--active")
+            })
+        })
+    })
+}
+
+document.addEventListener("DOMContentLoaded", ()=> {
+    setUpTabs();
+})

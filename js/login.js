@@ -5,7 +5,7 @@ const checkbox = document.getElementById('checkbox')
 const btnIngresar = document.getElementById('btnIngresar') */
 
 const formSignUp = document.getElementById('formSignUp')
-const btnRegistrar = document.getElementById('btnRegistrar')
+const btnRegistrar = document.getElementById('boton-registrar')
 
 const datos = JSON.parse(localStorage.getItem("datos")) || []; 
 
@@ -34,10 +34,10 @@ function crearUsuario (crearUser, email, crearPas, rePassword ){
     
     localStorage.setItem("dato", JSON.stringify(datos))
     
-    /* document.getElementById('crearUser').value = ""
+    document.getElementById('crearUser').value = ""
     document.getElementById('email').value= ""
     document.getElementById('crearPas').value= ""
-    document.getElementById('rePassword').value = "" */
+    document.getElementById('rePassword').value = ""
 }
 
 

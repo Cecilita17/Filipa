@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    <div class="container-login">
+    <div class="container-pago">
       <header>
         <nav class="desktop1 navbar navbar-expand-lg navbar-light bg-light w-100 d-flex  align-items-center justify-content-between">
           <a class="logo1 d-flex justify-self-start align-self-start navbar-brand ms-4" href="../index.html"><img src="../img/logo-small.png"  alt=""></a>
@@ -135,59 +135,76 @@
         </div>
       </div>
 
-      <main class="login ">
-        <section class=" row h-100 gradient-form" style="background-color: none;">
-            <div class="container py-5">
-              <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-xl-10">
-                  <div class=" text-cambios ">
-                    <div class="row g-0 d-flex justify-content-center align-items-center">
-                        <div class="col-lg-6">
-                            <div class="card-body p-md-5 mx-md-4">
-                                <div class="text-center">
-                                    <img src=""
-                                    style="width: 185px;" alt="">
-                                    <h1 class="mt-5 mb-4 pb-1">Iniciar sesión</h1>
-                                </div>
-                
-                                <form id="formLogin">
-                                                 
-                                    <div class="form-outline mb-4">
-                                      <label class="form-label " for="usuario">Nombre de usuario</label>
-                                      <input type="text" id="userr" class="form-control" value=""/>
-                                    
-                                    </div>
-                
-                                    <div class="form-outline mb-4">
-                                      <label class="form-label" for="password">Contraseña</label>
-                                      <input type="password" id="pass" class="form-control" value="" />
-                                    </div>
+      <main class="mainPago">
+        <section>
+          <div>
+            <h3>Su compra:</h3>
+            <p id="su-compra-contenedor"></p>
+          </div>
+        </section>
 
-                                    <div>
-                                      <input type="checkbox" id="checkbox" >
-                                      <label for="checkbox"> Recordarme </label>
-                                    </div>
-                
-                                    <div class="text-center d-flex align-items-center justify-content-center pt-1 mb-5 pb-1 mt-4">
+        <section>
+            <div class="envio-pago-html">
+                <div class="tabs">
+                  <button id="tab-1" class="envio tab-button tab-button--active" data-for-tab="1">1. ENVIO</button>
 
-                                      <a href=""><button class="btn boton btn-block  me-5 pt-1 pb-1 " type="button" id="btnIngresar">Ingresar</button></a>
-
-                                      <a class="text-decoration-none" href="">Olvidó su contraseña?</a>
-                                    </div>
-                
-                                    <div class="d-flex align-items-center justify-content-center pb-4">
-                                    <p class="mb-0 me-2">No tiene una cuenta?</p>
-                                    <a href="../pages/registrarse.html" class="text-decoration-none">Crear nueva</a>
-                                    </div>
-                
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                  <button id="tab-2" class="pago tab-button tab-button--active" data-for-tab="2">2. PAGO</button>
                 </div>
+
+                <div class="datos-envio-htm tab-content tab-content--active" id="datos-envio-htm" data-tab="1">
+                  <p>Contacto</p>
+                  <div class="group">
+                      <label for="nombre" class="label">Nombre</label>
+                      <input id="nombre" type="text" class="input">
+                  </div>
+                  <div class="group">
+                      <label for="email" class="label">Email</label>
+                      <input id="email-envio" type="email" class="input" data-type="email-de-envio">
+                  </div>
+                  <div class="group">
+                      <label for="direccion" class="label"> direccion</label>
+                      <input id="direccion" type="text" class="input" >
+                  </div>
+                  <div class="group">
+                      <label for="telefono" class="label">Teléfono</label>
+                      <input id="tel-envio" type="number" class="input" data-type="tel-de-envio">
+                  </div>
+                  <div class="group">
+                      <input type="submit" id="enviar-envio" class="btn boton" value="Enviar">
+                  </div>
+                  <div class="hr"></div>
+                  
+              </div>
+
+              <div class="datos-pago-htm tab-content" id="datos-pago-htm" data-tab="2">
+                <p>Tab 2</p>
+                  <!-- <div class="group">
+                      <label for="user" class="label">Usuario</label>
+                      <input id="userRegis" type="text" class="input">
+                  </div>
+                  <div class="group">
+                      <label for="pass" class="label">Contraseña</label>
+                      <input id="passRegis" type="password" class="input" data-type="password">
+                  </div>
+                  <div class="group">
+                      <label for="pass" class="label">Repetir contraseña</label>
+                      <input id="rePassRegis" type="password" class="input" data-type="password">
+                  </div>
+                  <div class="group">
+                      <label for="pass" class="label">Email</label>
+                      <input id="email" type="text" class="input">
+                  </div>
+                  <div class="group">
+                      <input type="submit" id="registro" class="button"  value="Registrarse">
+                  </div>
+                  <div class="hr"></div>
+                  <div class="foot-lnk">
+                      <label for="tab-1">Ya eres miembro?</a>
+                  </div> -->
+              </div>
             </div>
         </section>
-    </main> 
+      </main> 
 
         <!--FOOTER-->
         <footer class="footer row bg-color-nav">

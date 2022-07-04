@@ -5,6 +5,7 @@
 }
 body{
   background-color: white;
+  
 }
 .containerr{
   position: relative;
@@ -32,6 +33,19 @@ body{
   grid-template-rows: auto; 
   grid-template-areas: "header"
                         "login"
+                        "footer";
+}
+
+.container-pago{
+  position: relative;
+  background-color: white;
+  height: 100vh;
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr; ; 
+  grid-template-rows: auto; 
+  grid-template-areas: "header"
+                        "pago"
                         "footer";
 }
 
@@ -371,6 +385,17 @@ header nav a img{
   z-index: 5;
 }
 
+.modal-carrito-inactive{
+  opacity: 1;
+  display: none !important;
+  z-index: 5;
+}
+
+.modal-carrito-active{
+  opacity: 1;
+  visibility: visible !important;
+  z-index: 5;
+}
 .modal-carrito {
   display: flex;
   flex-flow: column nowrap;
@@ -384,14 +409,34 @@ header nav a img{
   margin-top: -100%;
   transition: all 0.5s;
 }
+.modalP{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  text-align: center;
+  color: #250F0B;
+  
 
+}
+
+.modalP p{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.modalP a{
+  text-decoration: none;
+  color: black;
+}
 .modal-active .modal-carrito {
   margin-top: 0;
 }
 
 .modal-carrito h3 {
   color: rgb(170, 96, 96);
+  font-size: 2rem;
   padding-bottom: 5px;
+  padding-top: 2%;
   text-align: center;
 }
 .modal-carrito #carritoCerrar {
@@ -413,6 +458,27 @@ header nav a img{
   padding-top: 10px;
 }
 
+.precioProducto{
+  font-size: 1.2rem;
+  text-align: end;
+  margin-right: 3%;
+}
+
+.divPagar{
+  margin-top: 3%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divPagar a{
+  text-decoration: none;
+}
+
+.divPagar button{
+  width: 150px;
+}
 /*producto en carrito*/
 .productoEnCarrito {
   border-left: 5px solid lightblue;
@@ -426,12 +492,39 @@ header nav a img{
 .productoEnCarrito:hover {
   border-left: 5px solid rgb(225, 76, 65);
 }
+.divCarritoLadoImagen{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center ;
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
 
+.divCarritoLadoImagen p{
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+}
+.productoNombre{
+  font-size: 1rem;
+  font-weight: 700;
+  position: absolute;
+  top: 0;
+}
 .boton-eliminar {
   background-color: white;
   color: red;
   border: none;
   font-size: 20px;
+  display: flex;
+  gap: 5px;
+  
+}
+
+.elimTexto{
+  color: black;
+  font-size: 16px;
 }
 
 .boton-eliminar:hover {
@@ -439,6 +532,21 @@ header nav a img{
 }
 .boton-eliminar:focus {
   outline: none;
+}
+
+
+.divCarrito{
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+  gap: 10px;
+  padding: 1%;
+  width: 350px;
+}
+
+.imgCarrito{
+  width: 30%;
+  margin: 1%;
 }
 
 
@@ -618,6 +726,9 @@ header nav a img{
 }
 
 /* main */
+.mainPago{
+  grid-area: pago;
+}
 .main{
   grid-area: main;
   background-color: white ;
@@ -645,6 +756,104 @@ header nav a img{
 }
 .producto{
   width: 16rem;
+}
+
+/* direccionPago.html*/
+.mainPago{
+  margin-top: 120px;
+  height: 700px;
+  margin-inline: 5%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+.mainPago section{
+  height: 600px;
+}
+
+.mainPago section:first-of-type{
+  padding-left: 3%;
+  border-left: 1px solid grey;
+  height: 600px;
+}
+.envio-pago-html{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 9%;
+}
+.tabs{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  
+}
+.tab{
+  padding: 5px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+.tab:first-of-type{
+  padding-right: 5%;
+}
+
+.envio, .pago{
+  width: 50%;
+  padding: 5px;
+  color: #979494;
+  background-color: white;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid grey ;
+}
+
+.datos-envio-htm{
+  height: auto;
+  width: 500px;
+  padding: 5%;
+  
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.datos-envio-htm p{
+  font-size: 2rem;
+}
+.group{
+  display: flex;
+  flex-direction: column;
+}
+.input{
+  width: 400px;
+}
+
+/* .tab-button:active{
+  
+  border-bottom: 3px solid #250F0B;
+  padding-top: 5px;
+  outline: none;
+  cursor: pointer;
+} */
+.tab-button{
+  background-color: #313837;
+}
+.tab-button--active{
+  background-color: pink;
+}
+
+.tab-content{
+  display: none;
+}
+.tab-content--active{
+  display: block;
 }
 
 /*FOOTER*/
