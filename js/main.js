@@ -152,7 +152,7 @@ function agregarAlCarrito (){
     carritoCompras.length = 0
     for (let index = 0; index < localStorage.length; index++) {
         let key = localStorage.key(index)
-        typeof JSON.parse(localStorage.getItem(key)) == "object" && carritoCompras.push(JSON.parse(localStorage.getItem(key)))
+        typeof JSON.parse(localStorage.getItem(key)) == "object" && key !== "dato" && carritoCompras.push(JSON.parse(localStorage.getItem(key)))
     }
     mostrarCarrito()
     actualizarTotalesCarrito()

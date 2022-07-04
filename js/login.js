@@ -29,15 +29,12 @@ class NewUser{
 }
 
 function crearUsuario (crearUser, email, crearPas, rePassword ){
+    localStorage.setItem("dato", JSON.stringify(new NewUser(crearUser, email, crearPas, rePassword )))
     
-    datos.push(new NewUser(crearUser, email, crearPas, rePassword ))
-    
-    localStorage.setItem("dato", JSON.stringify(datos))
-    
-    document.getElementById('crearUser').value = ""
+    /* document.getElementById('crearUser').value = ""
     document.getElementById('email').value= ""
     document.getElementById('crearPas').value= ""
-    document.getElementById('rePassword').value = ""
+    document.getElementById('rePassword').value = "" */
 }
 
 
