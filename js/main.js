@@ -146,6 +146,33 @@ contenedorCarrito.addEventListener("click", (e)=>{
 
 })
 
+suCompraContenedor.addEventListener("click", (e)=>{
+    e.target.id === "eliminar" && borrarProducto(e.target.dataset.id);
+
+    setTimeout(() => {
+        window.location.href ="./direccionPago.html"
+    }, 700);
+
+    Toastify({
+        text: "Producto eliminado",
+        duration: 3000,
+        destination: "#index.html",
+        newWindow: false,
+        close: false,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, rgb(170, 96, 96), white,  rgb(170, 96, 96), white) ",
+          color: "black",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+
+      
+      
+})
+
 function borrarProducto(id){
     let productoBorrar = JSON.parse(localStorage.getItem(id))
     let productoOriginal = stockProductos.find(producto => producto.id === parseInt(id))
@@ -157,7 +184,11 @@ function borrarProducto(id){
         localStorage.removeItem(id)
         divPagar.innerHTML = ""
     }
-    agregarAlCarrito()
+
+    setTimeout(() => {
+        agregarAlCarrito()
+    }, 1500);
+    
     
 }
 
