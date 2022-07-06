@@ -107,10 +107,28 @@ function mostrarProductos(array){
 }
 
 contenedorCarrito.addEventListener("click", (e)=>{
-    if(e.target.id === "eliminar"){
+    /* if(e.target.id === "eliminar"){
         borrarProducto(e.target.dataset.id)
         
-    }
+    } */
+    e.target.id === "eliminar" && borrarProducto(e.target.dataset.id);
+    
+    Toastify({
+        text: "Producto eliminado",
+        duration: 3000,
+        destination: "#index.html",
+        newWindow: false,
+        close: false,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, rgb(170, 96, 96), white,  rgb(170, 96, 96), white) ",
+          color: "black",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+
 })
 
 function borrarProducto(id){
@@ -139,7 +157,6 @@ function agregarAlStorage(id){
 
         
     }else{
-        productoStorage.cantidad = 0
         productoStorage.cantidad = productoStorage.cantidad + 1 
         productoStorage.precio = productoStorage.precio + productoAgregar.precio
         localStorage.setItem(`${id}`, JSON.stringify(productoStorage))
@@ -156,6 +173,7 @@ function agregarAlCarrito (){
     }
     mostrarCarrito()
     actualizarTotalesCarrito()
+    
 }
 
 
@@ -163,16 +181,17 @@ function agregarAlCarrito (){
 function mostrarCarrito() {
     contenedorCarrito.innerHTML = ""
     carritoCompras.forEach(producto => {
+        const {img, nombre, precio, cantidad, id} = producto
         console.log(producto.id);
         contenedorCarrito.innerHTML += `<div class="divCarrito">
-                                            <img src="${producto.img}" class="imgCarrito mt-2 card-img-top" alt="...">
+                                            <img src="${img}" class="imgCarrito mt-2 card-img-top" alt="...">
                                             <div><hr></div>
                                             <div class="divCarritoLadoImagen">
-                                                <p class="productoNombre"> ${producto.nombre}</p>
+                                                <p class="productoNombre"> ${nombre}</p>
                                                 <div>
-                                                    <p>Precio: $${producto.precio}</p>
-                                                    <p>Cantidad: ${producto.cantidad}</p>
-                                                    <button class="boton-eliminar"><i id="eliminar" data-id="${producto.id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
+                                                    <p>Precio: $${precio}</p>
+                                                    <p>Cantidad: ${cantidad}</p>
+                                                    <button class="boton-eliminar"><i id="eliminar" data-id="${id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
                                                 </div>
                                             </div>
                                         </div>`
