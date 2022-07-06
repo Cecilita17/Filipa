@@ -20,6 +20,10 @@ contenedorModal.addEventListener("click", ()=>{
     carritoCerrar.click()
 })
 
+modalCarrito.addEventListener("mouseover", ()=>{
+    
+})
+
 //menu hamburguesa
 
 const botonHambur = document.getElementById("nav-toggle")
