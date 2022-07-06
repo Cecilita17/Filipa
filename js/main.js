@@ -44,7 +44,11 @@ function validarFormulario(e){
     e.preventDefault()
     myFunction()
 }
-form.addEventListener("submit", validarFormulario) 
+
+if(form){
+    form.addEventListener("submit", validarFormulario) 
+}
+
 
 
 //filtro rangeSlider
@@ -53,17 +57,22 @@ const slider1 = document.getElementById("slider1");
 const outputMin = document.getElementById("outputMin")
 const outputMax = document.getElementById("outputMax")
 
-slider2.oninput = function(){
-    outputMax.innerHTML = this.value;
+if(slider2){
+    slider2.oninput = function(){
+        outputMax.innerHTML = this.value;
+    }
 }
+
 
 /* slider1.oninput = function(){
     outputMin.innerHTML = this.value;
 } */
+if (slider1) {
+    slider1.addEventListener("input",(e)=>{
+        outputMin.innerHTML = e.target.value;
+    })
+}
 
-slider1.addEventListener("input",(e)=>{
-    outputMin.innerHTML = e.target.value;
-})
 
 function validarFormRange(e){
     e.preventDefault()
@@ -74,7 +83,10 @@ function validarFormRange(e){
 }
 
 const formRange = document.getElementById("formRange");
-formRange.addEventListener("submit", validarFormRange )
+if(formRange){
+    formRange.addEventListener("submit", validarFormRange )
+}
+
 
 
 //buscando
@@ -82,27 +94,30 @@ mostrarProductos(stockProductos);
 
 //logica ecommerce
 function mostrarProductos(array){
-    contenedorProductos.innerHTML=""
-    for (const el of array) {
-        let div = document.createElement("div");
-        div.className = "producto card-color m-3"
-        div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <h2 class="card-title">${el.nombre}</h2>
-                            <p class="card-text">${el.precio}</p>
-                            <p>${el.talle}</p>
-                            <a id="boton${el.id}" class="btn boton">Agregar</a>
-                        </div>`;
-        
-        contenedorProductos.appendChild(div)
+    if(contenedorProductos){
+        contenedorProductos.innerHTML=""
+        for (const el of array) {
+            let div = document.createElement("div");
+            div.className = "producto card-color m-3"
+            div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                <h2 class="card-title">${el.nombre}</h2>
+                                <p class="card-text">${el.precio}</p>
+                                <p>${el.talle}</p>
+                                <a id="boton${el.id}" class="btn boton">Agregar</a>
+                            </div>`;
+            
+            contenedorProductos.appendChild(div)
 
-        let btnAgregar = document.getElementById(`boton${el.id}`)
+            let btnAgregar = document.getElementById(`boton${el.id}`)
 
-        btnAgregar.addEventListener("click", () =>{
-            console.log(el.id);
-            agregarAlStorage(el.id);
-        })
+            btnAgregar.addEventListener("click", () =>{
+                console.log(el.id);
+                agregarAlStorage(el.id);
+            })
+        }
     }
+    
     
 }
 
@@ -197,8 +212,9 @@ function mostrarCarrito() {
                                         </div>`
 
             //agregar items del carrito a pagina de envio/pago
-            
-        /* suCompraContenedor.innerHTML += `<div class="divCarrito">
+         
+        if(suCompraContenedor){
+            suCompraContenedor.innerHTML += `<div class="divCarrito">
                                             <img src="${producto.img}" class="imgCarrito mt-2 card-img-top" alt="...">
                                             <div><hr></div>
                                             <div class="divCarritoLadoImagen">
@@ -209,7 +225,9 @@ function mostrarCarrito() {
                                                     <button class="boton-eliminar"><i id="eliminar" data-id="${producto.id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
                                                 </div>
                                             </div>
-                                        </div>` */
+                                        </div>`
+        }
+        
 
     })
 }
@@ -264,3 +282,7 @@ function setUpTabs() {
 document.addEventListener("DOMContentLoaded", ()=> {
     setUpTabs();
 })
+
+
+//login-signup
+

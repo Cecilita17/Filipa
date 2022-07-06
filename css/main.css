@@ -585,7 +585,7 @@ header nav a img{
   
 }
 .dropbtn:hover{
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid white;
   }
 
 /* Dropdown Content (Hidden by Default) */
@@ -760,8 +760,9 @@ header nav a img{
 
 /* direccionPago.html*/
 .mainPago{
-  margin-top: 120px;
-  height: 700px;
+  position: relative;
+  margin-top: 100px;
+  height: 800px;
   margin-inline: 5%;
   display: flex;
   flex-direction: row-reverse;
@@ -769,18 +770,41 @@ header nav a img{
   align-items: center;
 }
 .mainPago section{
-  height: 600px;
+  height: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-right: 9%;
 }
+.mainPago section .divPagoCompra{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  height: 700px ;
+  position: absolute;
+  top: 17px
+}
+
+.mainPago section .divPagoCompra{
+  position: relative;
+}
+.mainPago section div h3{
+  padding-bottom: 9%;
+}
+
+.mainPago section div .boton-comprar{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
 
 .mainPago section:first-of-type{
   padding-left: 3%;
   border-left: 1px solid grey;
-  height: 600px;
+  height: 700px;
 }
 
 .tabs{
@@ -822,13 +846,14 @@ header nav a img{
   display: none;
 }
 .tab-content--active{
+  position: relative;
   display: flex;
   gap:25px;
   flex-direction: column;
   justify-content: start;
   align-items: flex-start;
   width: 550px;
-  height: 600px;
+  height: 680px;
   background-color: white;
   
 }
@@ -867,6 +892,11 @@ header nav a img{
 .tab-content--active > div{
   display: flex;
   align-items: flex-start;
+}
+
+.tab-content--active .group .boton{
+  position: absolute;
+  bottom: 0;
 }
 
 .tab-content--active > .divGroup{

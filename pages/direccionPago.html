@@ -133,14 +133,16 @@
             </div>
             <p class="precioProducto"><span id="precioTotal"></span></p>
             <div id="terminar" style="display: flex; justify-content: flex-end;"></div>
+            <div id="divPagar" class="divPagar"></div>
         </div>
       </div>
 
       <main class="mainPago">
         <section>
-          <div>
+          <div class="divPagoCompra">
             <h3>Su compra:</h3>
             <p id="su-compra-contenedor"></p>
+            <input type="submit" id="" class="btn boton boton-comprar" value="Comprar">
           </div>
         </section>
 
@@ -149,7 +151,7 @@
               <div class="tabs">
                 <button id="tab-1" class="envio tab-button tab-button--active" data-for-tab="1">1. ENVIO</button>
       
-                <button id="tab-2" class="pago tab-button tab-button--active" data-for-tab="2">2. PAGO</button>
+                <button id="tab-2" class="pago tab-button " data-for-tab="2">2. PAGO</button>
               </div>
       
               <div class="tab-content tab-content--active" id="datos-envio-htm" data-tab="1">
@@ -171,7 +173,7 @@
                     <input id="tel-envio" type="number" class="input" data-type="tel-de-envio">
                 </div>
                 <div class="group">
-                    <input type="submit" id="enviar-envio" class="btn boton" value="Enviar">
+                    <input type="submit" id="enviar-envio" class="btn boton" value="Guardar">
                 </div>
                 <div class="hr"></div>
                 
@@ -210,7 +212,7 @@
                   </div>
               </div>
               <div class="group">
-                  <input type="submit" id="enviar-envio" class="btn boton" value="Enviar">
+                  <input type="submit" id="enviar-envio" class="btn boton" value="Guardar">
               </div>
               <div class="hr"></div>
             </div>
@@ -346,7 +348,7 @@
     <!-- link a js bootstrap-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <!--link a mi js-->
-    <script src="../js/login.js"></script>
+    <script src="../js/stock.js"></script>
     <script src="../js/toggle.js"></script>
     <script src="../js/login.js"></script>
     <script src="../js/main.js"></script>
