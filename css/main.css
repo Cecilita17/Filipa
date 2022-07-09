@@ -479,7 +479,7 @@ body{
   width: 100px !important;
 }
 .tab-content--active > .input2{
-  max-width: 100px;
+  max-width: 100px !important;
 }
 }
 
