@@ -94,36 +94,50 @@ function crearUsuario (crearUser, email, crearPas, rePassword ){
 }
 
 
+/* const {usuario, , contrasenia} = recuperarLS */
+
 //Iniciar sesion
 let recuperarLS = JSON.parse(localStorage.getItem('dato'))
-const contr = recuperarLS[0].contrasenia;
-const usu = recuperarLS[0].usuario;
 
-/* const [usu, , contr] = recuperarLS */
 
-const user = document.getElementById('userr')
-const pass = document.getElementById('pass')
+
+btnIngresar.addEventListener("click", (e)=> {
+    e.preventDefault()
+    let user = document.getElementById('userr').value
+    let pass = document.getElementById('pass').value
+    
+    validarLogin(user, pass)
+    
+})
 
 function validarLogin(user, pass){
     
-    if(user.value == usu && pass.value == contr){
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'inicio de sesion exitoso',
-            showConfirmButton: false,
-            timer: 1500
-          })
+    let usuarioExiste = recuperarLS.find(usuario => usuario.usuario === user)
     
+    if(usuarioExiste === undefined){
+        alert("El usuario no existe")
     }else{
-        Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Usuario o contraseña incorrectos',
-            showConfirmButton: false,
-            timer: 1500
-          })
+        if(usuarioExiste.usuario === user && usuarioExiste.contrasenia == pass){
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'inicio de sesion exitoso',
+                showConfirmButton: false,
+                timer: 1500
+              })
+        
+        }else{
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Usuario o contraseña incorrectos',
+                showConfirmButton: false,
+                timer: 1500
+              })
+        }
     }
+
+    
 }
 
 /* function save() {	
@@ -140,15 +154,3 @@ function rememberMe(){
     recuperarLS[0].contrasenia = "";
 }}
  */
-
-if(btnIngresar){
-    btnIngresar.addEventListener("click", (e)=> {
-        e.preventDefault()
-        validarLogin(user, pass)
-        /* rememberMe() */
-        
-    })
-}
-
-
-console.log(recuperarLS[0]);

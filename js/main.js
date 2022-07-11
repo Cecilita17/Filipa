@@ -1,5 +1,7 @@
-let carritoCompras = [];
 
+import { traerDatos } from "../bd/bd.js";
+
+let carritoCompras = [];
 const contenedorProductos = document.getElementById("contenedor-productos");
 const contenedorCarrito = document.getElementById("carrito-contenedor")
 
@@ -93,12 +95,13 @@ if(formRange){
 
 
 
-//buscador
-/* const buscar = document.getElementById("buscar").value;
+//buscador 
+const buscar = document.getElementById("buscar").value;
 const lupa = document.getElementById("lupa");
 
-function filtrarBusqueda (buscar){
-    
+const filtrarBusqueda = async(buscar) =>{
+    let stockProductos = await traerDatos()
+
     let filtrar = stockProductos.filter((el) => {
         return el.nombre.includes(buscar);
     });
@@ -109,41 +112,66 @@ lupa.addEventListener("click", () => {
     filtrarBusqueda(buscar)
     console.log(buscar);
 })
- */
+
 
 //async await
-const traerDatos = async() => {
-    let respuesta = await fetch( "./js/stock.json")
-    return respuesta.json()
-}
-
-const mostrarDatos = async() => {
-    let stockProductos = await traerDatos()
-
-    contenedorProductos.innerHTML=""
-        for (const el of stockProductos) {
-            let div = document.createElement("div");
-            div.className = "producto card-color m-3"
-            div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
-                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                <h2 class="card-title">${el.nombre}</h2>
-                                <p class="card-text">${el.precio}</p>
-                                <p>${el.talle}</p>
-                                <a id="boton${el.id}" class="btn boton">Agregar</a>
-                            </div>`;
-            
-            contenedorProductos.appendChild(div)
-
-            let btnAgregar = document.getElementById(`boton${el.id}`)
-
-            btnAgregar.addEventListener("click", () =>{
-                console.log(el.id);
-                agregarAlStorage(el.id);
-            })
+async function mostrarProductos(array){
+    console.log(array);
+    if(array){
+        if(contenedorProductos){
+            contenedorProductos.innerHTML=""
+            for (const el of array) {
+                let div = document.createElement("div");
+                div.className = "producto card-color m-3"
+                div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
+                                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                    <h2 class="card-title">${el.nombre}</h2>
+                                    <p class="card-text">${el.precio}</p>
+                                    <p>${el.talle}</p>
+                                    <a id="boton${el.id}" class="btn boton">Agregar</a>
+                                </div>`;
+                
+                contenedorProductos.appendChild(div)
+    
+                let btnAgregar = document.getElementById(`boton${el.id}`)
+    
+                btnAgregar.addEventListener("click", () =>{
+                    console.log(el.id);
+                    agregarAlStorage(el.id);
+                })
+            }
         }
-}
+    }else{
+        let stockProductos = await traerDatos()
+        console.log(stockProductos);
 
-mostrarDatos()
+        contenedorProductos.innerHTML=""
+            for (const el of stockProductos) {
+                let div = document.createElement("div");
+                div.className = "producto card-color m-3"
+                div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
+                                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                    <h2 class="card-title">${el.nombre}</h2>
+                                    <p class="card-text">${el.precio}</p>
+                                    <p>${el.talle}</p>
+                                    <a id="boton${el.id}" class="btn boton">Agregar</a>
+                                </div>`;
+                
+                contenedorProductos.appendChild(div)
+
+                let btnAgregar = document.getElementById(`boton${el.id}`)
+
+                btnAgregar.addEventListener("click", () =>{
+                    console.log(el.id);
+                    agregarAlStorage(el.id);
+                })
+            }
+    }
+    
+    
+    
+}
+mostrarProductos()
 
 const agregarAlStorage = async(id) => {
     let stockProductos = await traerDatos()
@@ -152,53 +180,51 @@ const agregarAlStorage = async(id) => {
 
     if(productoStorage === null){
         localStorage.setItem(`${id}`, JSON.stringify({...productoAgregar, cantidad:1}))
-        agregarAlCarrito()
+        
 
         
     }else{
         productoStorage.cantidad = productoStorage.cantidad + 1 
         productoStorage.precio = productoStorage.precio + productoAgregar.precio
         localStorage.setItem(`${id}`, JSON.stringify(productoStorage))
-        agregarAlCarrito()
-
+        
     }
-}
-
-function mostrarProductos(array){
-    if(contenedorProductos){
-        contenedorProductos.innerHTML=""
-        for (const el of array) {
-            let div = document.createElement("div");
-            div.className = "producto card-color m-3"
-            div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
-                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                <h2 class="card-title">${el.nombre}</h2>
-                                <p class="card-text">${el.precio}</p>
-                                <p>${el.talle}</p>
-                                <a id="boton${el.id}" class="btn boton">Agregar</a>
-                            </div>`;
-            
-            contenedorProductos.appendChild(div)
-
-            let btnAgregar = document.getElementById(`boton${el.id}`)
-
-            btnAgregar.addEventListener("click", () =>{
-                console.log(el.id);
-                agregarAlStorage(el.id);
-            })
-        }
-    }
-    
-    
+    agregarAlCarrito()
 }
 
 contenedorCarrito.addEventListener("click", (e)=>{
-    /* if(e.target.id === "eliminar"){
+    if(e.target.id === "eliminar"){
         borrarProducto(e.target.dataset.id)
         
-    } */
-    e.target.id === "eliminar" && borrarProducto(e.target.dataset.id);
+        Toastify({
+            text: "Producto eliminado",
+            duration: 3000,
+            destination: "#index.html",
+            newWindow: false,
+            close: false,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, rgb(170, 96, 96), white,  rgb(170, 96, 96), white) ",
+              color: "black",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+    }
+
     
+    
+
+})
+
+suCompraContenedor.addEventListener("click", (e)=>{
+    e.target.id === "eliminar" && borrarProducto(e.target.dataset.id);
+
+    setTimeout(() => {
+        window.location.href ="./direccionPago.html"
+    }, 700);
+
     Toastify({
         text: "Producto eliminado",
         duration: 3000,
@@ -215,41 +241,15 @@ contenedorCarrito.addEventListener("click", (e)=>{
         onClick: function(){} // Callback after click
       }).showToast();
 
+      
+      
 })
-
-if(suCompraContenedor){
-    suCompraContenedor.addEventListener("click", (e)=>{
-        e.target.id === "eliminar" && borrarProducto(e.target.dataset.id);
-    
-        setTimeout(() => {
-            window.location.href ="./direccionPago.html"
-        }, 700);
-    
-        Toastify({
-            text: "Producto eliminado",
-            duration: 3000,
-            destination: "#index.html",
-            newWindow: false,
-            close: false,
-            gravity: "top", // `top` or `bottom`
-            position: "right", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            style: {
-              background: "linear-gradient(to right, rgb(170, 96, 96), white,  rgb(170, 96, 96), white) ",
-              color: "black",
-            },
-            onClick: function(){} // Callback after click
-          }).showToast();
-    
-          
-          
-    })
-}
 
 
 
 const borrarProducto = async(id) =>{
     let stockProductos = await traerDatos()
+    console.log(stockProductos);
     
     let productoBorrar = JSON.parse(localStorage.getItem(id))
     let productoOriginal = stockProductos.find(producto => producto.id === parseInt(id))
@@ -257,27 +257,24 @@ const borrarProducto = async(id) =>{
         productoBorrar.cantidad = productoBorrar.cantidad -1 
         productoBorrar.precio = productoBorrar.precio - productoOriginal.precio
         localStorage.setItem(`${id}`, JSON.stringify(productoBorrar))
+        agregarAlCarrito()
     }else{
         localStorage.removeItem(id)
         divPagar.innerHTML = ""
+        agregarAlCarrito()
     }
 
-    setTimeout(() => {
-        agregarAlCarrito()
-    }, 1500);
+    
     
     
 }
 
-
-
-
-
 function agregarAlCarrito (){
+    
     carritoCompras.length = 0
     for (let index = 0; index < localStorage.length; index++) {
         let key = localStorage.key(index)
-        typeof JSON.parse(localStorage.getItem(key)) == "object" && key !== "dato" && carritoCompras.push(JSON.parse(localStorage.getItem(key)))
+        key !== "dato" && carritoCompras.push(JSON.parse(localStorage.getItem(key)))
     }
 
     /* Object.key(localStorage).forEach((key) => console.log(JSON.parse(localStorage.getItem(key)))) */
@@ -287,9 +284,8 @@ function agregarAlCarrito (){
     
 }
 
-
-
 const mostrarCarrito = () => {
+    
     contenedorCarrito.innerHTML = ""
     carritoCompras.forEach(producto => {
     const {img, nombre, precio, cantidad, id} = producto
@@ -307,22 +303,24 @@ const mostrarCarrito = () => {
                                         </div>
                                     </div>`
 
-    })
     //agregar items del carrito a pagina de envio/pago
-    if(suCompraContenedor){
-        suCompraContenedor.innerHTML += `<div class="divCarrito">
-                                        <img src="${producto.img}" class="imgCarrito mt-2 card-img-top" alt="...">
+        if(suCompraContenedor){
+            suCompraContenedor.innerHTML += `<div class="divCarrito">
+                                        <img src="${img}" class="imgCarrito mt-2 card-img-top" alt="...">
                                         <div><hr></div>
                                         <div class="divCarritoLadoImagen">
-                                            <p class="productoNombre"> ${producto.nombre}</p>
+                                            <p class="productoNombre"> ${nombre}</p>
                                             <div>
-                                                <p>Precio: $${producto.precio}</p>
-                                                <p>Cantidad: ${producto.cantidad}</p>
-                                                <button class="boton-eliminar"><i id="eliminar" data-id="${producto.id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
+                                                <p>Precio: $${precio}</p>
+                                                <p>Cantidad: ${cantidad}</p>
+                                                <button class="boton-eliminar"><i id="eliminar" data-id="${id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
                                             </div>
                                         </div>
                                     </div>`
-    }
+        }
+        
+    })
+    
 }
 
 
@@ -343,6 +341,7 @@ function actualizarTotalesCarrito(){
     
 
 }
+
 
 
 //Envio y pago tabs
@@ -378,4 +377,3 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 
 //login-signup
-
