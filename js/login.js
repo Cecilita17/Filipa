@@ -96,12 +96,17 @@ function crearUsuario (crearUser, email, crearPas, rePassword ){
 
 //Iniciar sesion
 let recuperarLS = JSON.parse(localStorage.getItem('dato'))
+const contr = recuperarLS[0].contrasenia;
+const usu = recuperarLS[0].usuario;
+
+/* const [usu, , contr] = recuperarLS */
+
 const user = document.getElementById('userr')
 const pass = document.getElementById('pass')
 
 function validarLogin(user, pass){
     
-    if(user.value == recuperarLS[0].usuario && pass.value == recuperarLS[0].contrasenia){
+    if(user.value == usu && pass.value == contr){
         Swal.fire({
             position: 'center',
             icon: 'success',
@@ -121,9 +126,9 @@ function validarLogin(user, pass){
     }
 }
 
-function save() {	
+/* function save() {	
 	const checkbox = document.getElementById('checkbox')
-    localStorage.setItem("checkbox", checkbox.checked);	
+    localStorage.setItem("checkbox", JSON.stringify(checkbox.checked));	
 }
 
 function rememberMe(){
@@ -134,16 +139,16 @@ function rememberMe(){
     recuperarLS[0].usuario = "";
     recuperarLS[0].contrasenia = "";
 }}
-
+ */
 
 if(btnIngresar){
     btnIngresar.addEventListener("click", (e)=> {
         e.preventDefault()
         validarLogin(user, pass)
-        rememberMe()
+        /* rememberMe() */
         
     })
-    
 }
 
-console.log(recuperarLS);
+
+console.log(recuperarLS[0]);

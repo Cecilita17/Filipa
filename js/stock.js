@@ -1,4 +1,4 @@
-let stockProductos = [
+/* let stockProductos = [
     {id: 1, nombre: "Sweater Anna", tipo: "sweater",  precio: 1200, talle: "L", img: '/img/1.png'},
     {id: 2, nombre: "Sweater Anna", tipo: "sweater",  precio: 1200, talle: "M", img: '/img/1.png'},
     {id: 3, nombre: "Sweater Anna", tipo: "sweater",  precio: 1200, talle: "S", img: '/img/1.png'},
@@ -46,4 +46,4 @@ let stockProductos = [
     
 
 
-]
+] */

@@ -22,8 +22,11 @@ const suCompraContenedor = document.getElementById("su-compra-contenedor")
 window.addEventListener("DOMContentLoaded", agregarAlCarrito)
 
 
+
 //filtro radio
-function myFunction (){
+const myFunction = async() =>{
+    let stockProductos = await traerDatos()
+
     let talle = document.querySelectorAll('[name="talle"]');
     console.log(talle);
 
@@ -74,7 +77,8 @@ if (slider1) {
 }
 
 
-function validarFormRange(e){
+const validarFormRange = async(e) =>{
+    let stockProductos = await traerDatos()
     e.preventDefault()
     let valorMin = slider1.value;
     let valorMax = slider2.value;
@@ -89,10 +93,77 @@ if(formRange){
 
 
 
-//buscando
-mostrarProductos(stockProductos);
+//buscador
+/* const buscar = document.getElementById("buscar").value;
+const lupa = document.getElementById("lupa");
 
-//logica ecommerce
+function filtrarBusqueda (buscar){
+    
+    let filtrar = stockProductos.filter((el) => {
+        return el.nombre.includes(buscar);
+    });
+    mostrarProductos(filtrar)
+}
+
+lupa.addEventListener("click", () => {
+    filtrarBusqueda(buscar)
+    console.log(buscar);
+})
+ */
+
+//async await
+const traerDatos = async() => {
+    let respuesta = await fetch( "./js/stock.json")
+    return respuesta.json()
+}
+
+const mostrarDatos = async() => {
+    let stockProductos = await traerDatos()
+
+    contenedorProductos.innerHTML=""
+        for (const el of stockProductos) {
+            let div = document.createElement("div");
+            div.className = "producto card-color m-3"
+            div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
+                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                <h2 class="card-title">${el.nombre}</h2>
+                                <p class="card-text">${el.precio}</p>
+                                <p>${el.talle}</p>
+                                <a id="boton${el.id}" class="btn boton">Agregar</a>
+                            </div>`;
+            
+            contenedorProductos.appendChild(div)
+
+            let btnAgregar = document.getElementById(`boton${el.id}`)
+
+            btnAgregar.addEventListener("click", () =>{
+                console.log(el.id);
+                agregarAlStorage(el.id);
+            })
+        }
+}
+
+mostrarDatos()
+
+const agregarAlStorage = async(id) => {
+    let stockProductos = await traerDatos()
+    let productoAgregar = stockProductos.find(ele => ele.id ===parseInt(id))
+    let productoStorage = JSON.parse(localStorage.getItem(id))
+
+    if(productoStorage === null){
+        localStorage.setItem(`${id}`, JSON.stringify({...productoAgregar, cantidad:1}))
+        agregarAlCarrito()
+
+        
+    }else{
+        productoStorage.cantidad = productoStorage.cantidad + 1 
+        productoStorage.precio = productoStorage.precio + productoAgregar.precio
+        localStorage.setItem(`${id}`, JSON.stringify(productoStorage))
+        agregarAlCarrito()
+
+    }
+}
+
 function mostrarProductos(array){
     if(contenedorProductos){
         contenedorProductos.innerHTML=""
@@ -177,7 +248,9 @@ if(suCompraContenedor){
 
 
 
-function borrarProducto(id){
+const borrarProducto = async(id) =>{
+    let stockProductos = await traerDatos()
+    
     let productoBorrar = JSON.parse(localStorage.getItem(id))
     let productoOriginal = stockProductos.find(producto => producto.id === parseInt(id))
     if(productoBorrar.cantidad > 1 ){
@@ -197,23 +270,8 @@ function borrarProducto(id){
 }
 
 
-function agregarAlStorage(id){
-    let productoStorage = JSON.parse(localStorage.getItem(id))
-    let productoAgregar = stockProductos.find(ele => ele.id === id)
 
-    if(productoStorage === null){
-        localStorage.setItem(`${id}`, JSON.stringify({...productoAgregar, cantidad:1}))
-        agregarAlCarrito()
 
-        
-    }else{
-        productoStorage.cantidad = productoStorage.cantidad + 1 
-        productoStorage.precio = productoStorage.precio + productoAgregar.precio
-        localStorage.setItem(`${id}`, JSON.stringify(productoStorage))
-        agregarAlCarrito()
-
-    }
-}
 
 function agregarAlCarrito (){
     carritoCompras.length = 0
@@ -221,6 +279,9 @@ function agregarAlCarrito (){
         let key = localStorage.key(index)
         typeof JSON.parse(localStorage.getItem(key)) == "object" && key !== "dato" && carritoCompras.push(JSON.parse(localStorage.getItem(key)))
     }
+
+    /* Object.key(localStorage).forEach((key) => console.log(JSON.parse(localStorage.getItem(key)))) */
+    
     mostrarCarrito()
     actualizarTotalesCarrito()
     
@@ -228,43 +289,40 @@ function agregarAlCarrito (){
 
 
 
-function mostrarCarrito() {
+const mostrarCarrito = () => {
     contenedorCarrito.innerHTML = ""
     carritoCompras.forEach(producto => {
-        const {img, nombre, precio, cantidad, id} = producto
-        console.log(producto.id);
-        contenedorCarrito.innerHTML += `<div class="divCarrito">
-                                            <img src="${img}" class="imgCarrito mt-2 card-img-top" alt="...">
-                                            <div><hr></div>
-                                            <div class="divCarritoLadoImagen">
-                                                <p class="productoNombre"> ${nombre}</p>
-                                                <div>
-                                                    <p>Precio: $${precio}</p>
-                                                    <p>Cantidad: ${cantidad}</p>
-                                                    <button class="boton-eliminar"><i id="eliminar" data-id="${id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
-                                                </div>
+    const {img, nombre, precio, cantidad, id} = producto
+    console.log(producto.id);
+    contenedorCarrito.innerHTML += `<div class="divCarrito">
+                                        <img src="${img}" class="imgCarrito mt-2 card-img-top" alt="...">
+                                        <div><hr></div>
+                                        <div class="divCarritoLadoImagen">
+                                            <p class="productoNombre"> ${nombre}</p>
+                                            <div>
+                                                <p>Precio: $${precio}</p>
+                                                <p>Cantidad: ${cantidad}</p>
+                                                <button class="boton-eliminar"><i id="eliminar" data-id="${id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
                                             </div>
-                                        </div>`
-
-            //agregar items del carrito a pagina de envio/pago
-         
-        if(suCompraContenedor){
-            suCompraContenedor.innerHTML += `<div class="divCarrito">
-                                            <img src="${producto.img}" class="imgCarrito mt-2 card-img-top" alt="...">
-                                            <div><hr></div>
-                                            <div class="divCarritoLadoImagen">
-                                                <p class="productoNombre"> ${producto.nombre}</p>
-                                                <div>
-                                                    <p>Precio: $${producto.precio}</p>
-                                                    <p>Cantidad: ${producto.cantidad}</p>
-                                                    <button class="boton-eliminar"><i id="eliminar" data-id="${producto.id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
-                                                </div>
-                                            </div>
-                                        </div>`
-        }
-        
+                                        </div>
+                                    </div>`
 
     })
+    //agregar items del carrito a pagina de envio/pago
+    if(suCompraContenedor){
+        suCompraContenedor.innerHTML += `<div class="divCarrito">
+                                        <img src="${producto.img}" class="imgCarrito mt-2 card-img-top" alt="...">
+                                        <div><hr></div>
+                                        <div class="divCarritoLadoImagen">
+                                            <p class="productoNombre"> ${producto.nombre}</p>
+                                            <div>
+                                                <p>Precio: $${producto.precio}</p>
+                                                <p>Cantidad: ${producto.cantidad}</p>
+                                                <button class="boton-eliminar"><i id="eliminar" data-id="${producto.id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
+                                            </div>
+                                        </div>
+                                    </div>`
+    }
 }
 
 
