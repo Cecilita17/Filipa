@@ -1,29 +1,18 @@
+let carritoCompras = [];
 
 import { traerDatos } from "../bd/bd.js";
-
-let carritoCompras = [];
 const contenedorProductos = document.getElementById("contenedor-productos");
 const contenedorCarrito = document.getElementById("carrito-contenedor")
-
-const talles = document.getElementById("talles");
-const submit = document.getElementById("submit");
-
+const dropdawn = document.getElementById('dropdown')
 const form = document.getElementById("form");
-const L = document.getElementById("talleL")
-const M = document.getElementById("talleM")
-const S = document.getElementById("talleS")
-const talleTodos = document.getElementById ("talleTodos")
-
 const divPagar = document.getElementById("divPagar")
-
 const contadorCarrito = document.getElementById('contador-carrito');
 const precioTotal = document.getElementById('precioTotal');
-
 const suCompraContenedor = document.getElementById("su-compra-contenedor")
 
+let userActivo = JSON.parse(localStorage.getItem('userActivo'))
+
 window.addEventListener("DOMContentLoaded", agregarAlCarrito)
-
-
 
 //filtro radio
 const myFunction = async() =>{
@@ -112,85 +101,70 @@ lupa.addEventListener("click", () => {
     filtrarBusqueda(buscar)
     console.log(buscar);
 })
+mostrarProductos()
 
 
 //async await
 async function mostrarProductos(array){
-    console.log(array);
-    if(array){
-        if(contenedorProductos){
-            contenedorProductos.innerHTML=""
-            for (const el of array) {
-                let div = document.createElement("div");
-                div.className = "producto card-color m-3"
-                div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
-                                <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                    <h2 class="card-title">${el.nombre}</h2>
-                                    <p class="card-text">${el.precio}</p>
-                                    <p>${el.talle}</p>
-                                    <a id="boton${el.id}" class="btn boton">Agregar</a>
-                                </div>`;
-                
-                contenedorProductos.appendChild(div)
-    
-                let btnAgregar = document.getElementById(`boton${el.id}`)
-    
-                btnAgregar.addEventListener("click", () =>{
-                    console.log(el.id);
-                    agregarAlStorage(el.id);
-                })
+    if(contenedorProductos){
+        if(array !== undefined){
+            if(contenedorProductos){
+                contenedorProductos.innerHTML=""
+                for (const el of array) {
+                    let div = document.createElement("div");
+                    div.className = "producto card-color m-3"
+                    div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
+                                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                        <h2 class="card-title">${el.nombre}</h2>
+                                        <p class="card-text">${el.precio}</p>
+                                        <p>${el.talle}</p>
+                                        <a id="boton${el.id}" class="btn boton">Agregar</a>
+                                    </div>`;
+                    
+                    contenedorProductos.appendChild(div)
+        
+                    let btnAgregar = document.getElementById(`boton${el.id}`)
+        
+                    btnAgregar.addEventListener("click", () =>{
+                        agregarAlStorage(el.id);
+                    })
+                }
             }
+        }else{
+            let stockProductos = await traerDatos()
+            contenedorProductos.innerHTML=""
+                for (const el of stockProductos) {
+                    let div = document.createElement("div");
+                    div.className = "producto card-color m-3"
+                    div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
+                                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                        <h2 class="card-title">${el.nombre}</h2>
+                                        <p class="card-text">${el.precio}</p>
+                                        <p>${el.talle}</p>
+                                        <a id="boton${el.id}" class="btn boton">Agregar</a>
+                                    </div>`;
+                    
+                    contenedorProductos.appendChild(div)
+    
+                    let btnAgregar = document.getElementById(`boton${el.id}`)
+    
+                    btnAgregar.addEventListener("click", () =>{
+                        console.log(el.id);
+                        agregarAlStorage(el.id);
+                    })
+                }
         }
     }else{
-        let stockProductos = await traerDatos()
-        console.log(stockProductos);
-
-        contenedorProductos.innerHTML=""
-            for (const el of stockProductos) {
-                let div = document.createElement("div");
-                div.className = "producto card-color m-3"
-                div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
-                                <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                    <h2 class="card-title">${el.nombre}</h2>
-                                    <p class="card-text">${el.precio}</p>
-                                    <p>${el.talle}</p>
-                                    <a id="boton${el.id}" class="btn boton">Agregar</a>
-                                </div>`;
-                
-                contenedorProductos.appendChild(div)
-
-                let btnAgregar = document.getElementById(`boton${el.id}`)
-
-                btnAgregar.addEventListener("click", () =>{
-                    console.log(el.id);
-                    agregarAlStorage(el.id);
-                })
-            }
+        false
     }
     
     
     
+    
 }
-mostrarProductos()
+/* mostrarProductos() */
 
-const agregarAlStorage = async(id) => {
-    let stockProductos = await traerDatos()
-    let productoAgregar = stockProductos.find(ele => ele.id ===parseInt(id))
-    let productoStorage = JSON.parse(localStorage.getItem(id))
 
-    if(productoStorage === null){
-        localStorage.setItem(`${id}`, JSON.stringify({...productoAgregar, cantidad:1}))
-        
-
-        
-    }else{
-        productoStorage.cantidad = productoStorage.cantidad + 1 
-        productoStorage.precio = productoStorage.precio + productoAgregar.precio
-        localStorage.setItem(`${id}`, JSON.stringify(productoStorage))
-        
-    }
-    agregarAlCarrito()
-}
 
 contenedorCarrito.addEventListener("click", (e)=>{
     if(e.target.id === "eliminar"){
@@ -218,41 +192,11 @@ contenedorCarrito.addEventListener("click", (e)=>{
 
 })
 
-suCompraContenedor.addEventListener("click", (e)=>{
-    e.target.id === "eliminar" && borrarProducto(e.target.dataset.id);
-
-    setTimeout(() => {
-        window.location.href ="./direccionPago.html"
-    }, 700);
-
-    Toastify({
-        text: "Producto eliminado",
-        duration: 3000,
-        destination: "#index.html",
-        newWindow: false,
-        close: false,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "linear-gradient(to right, rgb(170, 96, 96), white,  rgb(170, 96, 96), white) ",
-          color: "black",
-        },
-        onClick: function(){} // Callback after click
-      }).showToast();
-
-      
-      
-})
-
-
-
 const borrarProducto = async(id) =>{
     let stockProductos = await traerDatos()
-    console.log(stockProductos);
-    
     let productoBorrar = JSON.parse(localStorage.getItem(id))
     let productoOriginal = stockProductos.find(producto => producto.id === parseInt(id))
+
     if(productoBorrar.cantidad > 1 ){
         productoBorrar.cantidad = productoBorrar.cantidad -1 
         productoBorrar.precio = productoBorrar.precio - productoOriginal.precio
@@ -264,9 +208,25 @@ const borrarProducto = async(id) =>{
         agregarAlCarrito()
     }
 
-    
-    
-    
+}
+
+const agregarAlStorage = async(id) => {
+    let stockProductos = await traerDatos()
+    let productoAgregar = stockProductos.find(ele => ele.id ===parseInt(id))
+    let productoStorage = JSON.parse(localStorage.getItem(id))
+
+    if(productoStorage === null){
+        localStorage.setItem(`${id}`, JSON.stringify({...productoAgregar, cantidad:1}))
+        
+
+        
+    }else{
+        productoStorage.cantidad = productoStorage.cantidad + 1 
+        productoStorage.precio = productoStorage.precio + productoAgregar.precio
+        localStorage.setItem(`${id}`, JSON.stringify(productoStorage))
+        
+    }
+    agregarAlCarrito()
 }
 
 function agregarAlCarrito (){
@@ -274,10 +234,11 @@ function agregarAlCarrito (){
     carritoCompras.length = 0
     for (let index = 0; index < localStorage.length; index++) {
         let key = localStorage.key(index)
-        key !== "dato" && carritoCompras.push(JSON.parse(localStorage.getItem(key)))
-    }
 
-    /* Object.key(localStorage).forEach((key) => console.log(JSON.parse(localStorage.getItem(key)))) */
+        typeof JSON.parse(localStorage.getItem(key)) === "object" && key !== 'usuarios' && key !== 'userActivo'  ? carritoCompras.push(JSON.parse(localStorage.getItem(key))): false
+
+        /* key !== "dato" && carritoCompras.push(JSON.parse(localStorage.getItem(key))) */
+    }
     
     mostrarCarrito()
     actualizarTotalesCarrito()
@@ -285,11 +246,11 @@ function agregarAlCarrito (){
 }
 
 const mostrarCarrito = () => {
-    
-    contenedorCarrito.innerHTML = ""
+    contenedorCarrito ? contenedorCarrito.innerHTML = "" : false
+    suCompraContenedor ? suCompraContenedor.innerHTML = "" : false
+
     carritoCompras.forEach(producto => {
     const {img, nombre, precio, cantidad, id} = producto
-    console.log(producto.id);
     contenedorCarrito.innerHTML += `<div class="divCarrito">
                                         <img src="${img}" class="imgCarrito mt-2 card-img-top" alt="...">
                                         <div><hr></div>
@@ -304,21 +265,20 @@ const mostrarCarrito = () => {
                                     </div>`
 
     //agregar items del carrito a pagina de envio/pago
-        if(suCompraContenedor){
-            suCompraContenedor.innerHTML += `<div class="divCarrito">
-                                        <img src="${img}" class="imgCarrito mt-2 card-img-top" alt="...">
-                                        <div><hr></div>
-                                        <div class="divCarritoLadoImagen">
-                                            <p class="productoNombre"> ${nombre}</p>
-                                            <div>
-                                                <p>Precio: $${precio}</p>
-                                                <p>Cantidad: ${cantidad}</p>
-                                                <button class="boton-eliminar"><i id="eliminar" data-id="${id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
-                                            </div>
+    suCompraContenedor ?
+        suCompraContenedor.innerHTML += `<div class="divCarrito">
+                                    <img src="${img}" class="imgCarrito mt-2 card-img-top" alt="...">
+                                    <div><hr></div>
+                                    <div class="divCarritoLadoImagen">
+                                        <p class="productoNombre"> ${nombre}</p>
+                                        <div>
+                                            <p>Precio: $${precio}</p>
+                                            <p>Cantidad: ${cantidad}</p>
+                                            <button class="boton-eliminar"><i id="eliminar" data-id="${id}" class="fas fa-trash-alt"></i><span class="elimTexto">Eliminar</span></button>
                                         </div>
-                                    </div>`
-        }
-        
+                                    </div>
+                                </div>`
+        : false
     })
     
 }
@@ -375,5 +335,58 @@ document.addEventListener("DOMContentLoaded", ()=> {
     setUpTabs();
 })
 
+suCompraContenedor ? suCompraContenedor.addEventListener("click", (e)=>{
+    if(e.target.id === "eliminar" ){
+        borrarProducto(e.target.dataset.id) && agregarAlCarrito()
+
+        Toastify({
+            text: "Producto eliminado",
+            duration: 3000,
+            destination: "#index.html",
+            newWindow: false,
+            close: false,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, rgb(170, 96, 96), white,  rgb(170, 96, 96), white) ",
+              color: "black",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+    }
+
+    
+}) : false
 
 //login-signup
+userActivo === null ?
+dropdawn.innerHTML = `<button class="dropbtn">Mi cuenta</button>
+<div class="dropdown-content ">
+  <a href="./pages/iniSesion.html">Iniciar sesión</a>
+  <a href="#">Mi carrito</a>
+  <a href="#">Mis compras</a>
+</div>`
+:
+dropdawn.innerHTML = `<button class=" dropbtn">Bienvenido! ${userActivo.usuario}</button>
+<div class="dropdown-content ">
+    <a id="cerrarSesion">Cerrar Sesion</a>
+    <a href="#">Novedades</a>
+    <a href="#">Contacto</a>
+</div> `
+
+dropdawn.addEventListener("click", (e) => {
+    if(e.target.id === "cerrarSesion"){
+        localStorage.removeItem("userActivo")
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Sesión cerrada con éxito',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        setTimeout(() => {
+            location.reload()
+        }, 1500);
+    }
+})
