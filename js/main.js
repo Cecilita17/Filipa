@@ -85,23 +85,25 @@ if(formRange){
 
 
 //buscador 
-const buscar = document.getElementById("buscar").value;
 const lupa = document.getElementById("lupa");
 
 const filtrarBusqueda = async(buscar) =>{
     let stockProductos = await traerDatos()
-
-    let filtrar = stockProductos.filter((el) => {
-        return el.nombre.includes(buscar);
-    });
+    console.log(buscar); //encuentra el valor
+    
+    console.log(typeof buscar); 
+    console.log(typeof stockProductos); //muestra el array
+    
+    let filtrar = stockProductos.filter((el) => el.nombre.includes(buscar));
+    console.log(filtrar); //???? el array esta vacio
     mostrarProductos(filtrar)
 }
 
 lupa.addEventListener("click", () => {
-    filtrarBusqueda(buscar)
-    console.log(buscar);
+    let buscar = document.getElementById("buscar").value;
+    filtrarBusqueda (buscar)
 })
-mostrarProductos()
+
 
 
 //async await
@@ -162,7 +164,7 @@ async function mostrarProductos(array){
     
     
 }
-/* mostrarProductos() */
+mostrarProductos()
 
 
 

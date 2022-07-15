@@ -52,6 +52,7 @@ function validarSignup(crearUser, crearPas, rePassword){
             })
 
         }else{
+            crearUsuario(crearUser, email, crearPas, rePassword)
             Swal.fire({
                 icon: 'success',
                 title: 'Registro exitoso',
@@ -114,26 +115,25 @@ function crearUsuario (crearUser, email, crearPas, rePassword ){
     }else{
         console.log(usuariosLS);
         let nuevoUsuario = new NewUser(crearUser, email, crearPas, rePassword)
-        localStorage.setItem("usuarios", JSON.stringify([...usuariosLS,nuevoUsuario]))
+        localStorage.setItem("usuarios", JSON.stringify([...usuariosLS, nuevoUsuario]))
     }
 }
 
 
 //Iniciar sesion
 
-/* const usuariosLS = JSON.parse(localStorage.getItem("usuarios"));  */
-
 btnIngresar ? btnIngresar.addEventListener("click", (e)=> {
     e.preventDefault()
     let user = document.getElementById('userr').value
     let pass = document.getElementById('pass').value
     validarLogin(user, pass)
+    
 }) : false
 
 function validarLogin(user, pass){
-    if (usuariosLS !== null){
+    if (usuariosLS !== undefined || usuariosLS !== null){
         let usuarioExiste = usuariosLS.find(usuario => usuario.usuario === user)
-        if(usuarioExiste === null){
+        if(usuarioExiste === undefined || usuarioExiste === null){
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -166,6 +166,7 @@ function validarLogin(user, pass){
             }
         }
     }else{
+        
         Swal.fire({
             position: 'center',
             icon: 'error',
