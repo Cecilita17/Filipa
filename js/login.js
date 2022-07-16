@@ -1,6 +1,3 @@
-/* const formLogin = document.getElementById("form-login")
-const formSignUp = document.getElementById('formSignUp') */
-
 const btnIngresar = document.getElementById('btnIngresar') 
 const btnRegistrar = document.getElementById('boton-registrar')
 

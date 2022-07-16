@@ -10,6 +10,7 @@ const contadorCarrito = document.getElementById('contador-carrito');
 const precioTotal = document.getElementById('precioTotal');
 const suCompraContenedor = document.getElementById("su-compra-contenedor")
 
+/* let stockProductos = await traerDatos() */
 let userActivo = JSON.parse(localStorage.getItem('userActivo'))
 
 window.addEventListener("DOMContentLoaded", agregarAlCarrito)
@@ -17,7 +18,6 @@ window.addEventListener("DOMContentLoaded", agregarAlCarrito)
 //filtro radio
 const myFunction = async() =>{
     let stockProductos = await traerDatos()
-
     let talle = document.querySelectorAll('[name="talle"]');
     console.log(talle);
 
@@ -25,10 +25,14 @@ const myFunction = async() =>{
         if (talle[i].checked){
             console.log(talle[i].value);
             if (talle[i].value === "todos") {
-                mostrarProductos(stockProductos);
+                mostrarProductos(stockProductos, rows, current_page);
+                setupPagination(stockProductos, pagination, rows);
+                
             }else{
                 let stockFiltrado = stockProductos.filter((item) => item.talle === talle[i].value);
-                mostrarProductos(stockFiltrado)
+                mostrarProductos(stockFiltrado, rows, current_page)
+                setupPagination(stockFiltrado, pagination, rows);
+                
             } 
         }
     }
@@ -57,10 +61,6 @@ if(slider2){
     }
 }
 
-
-/* slider1.oninput = function(){
-    outputMin.innerHTML = this.value;
-} */
 if (slider1) {
     slider1.addEventListener("input",(e)=>{
         outputMin.innerHTML = e.target.value;
@@ -74,7 +74,8 @@ const validarFormRange = async(e) =>{
     let valorMin = slider1.value;
     let valorMax = slider2.value;
     let filtroPrecio = stockProductos.filter(producto => producto.precio >= valorMin && producto.precio <= valorMax);
-    mostrarProductos(filtroPrecio)
+    mostrarProductos(filtroPrecio, rows, current_page)
+    setupPagination(filtroPrecio, pagination, rows);
 }
 
 const formRange = document.getElementById("formRange");
@@ -87,32 +88,72 @@ if(formRange){
 //buscador 
 const lupa = document.getElementById("lupa");
 
-const filtrarBusqueda = async(buscar) =>{
-    let stockProductos = await traerDatos()
-    console.log(buscar); //encuentra el valor
-    
-    console.log(typeof buscar); 
-    console.log(typeof stockProductos); //muestra el array
-    
-    let filtrar = stockProductos.filter((el) => el.nombre.includes(buscar));
-    console.log(filtrar); //???? el array esta vacio
-    mostrarProductos(filtrar)
-}
-
 lupa.addEventListener("click", () => {
     let buscar = document.getElementById("buscar").value;
     filtrarBusqueda (buscar)
 })
 
+const filtrarBusqueda = async(buscar) =>{    
+    let stockProductos = await traerDatos()
+    let filtrar = stockProductos.filter((el) => el.nombre.includes(buscar));
+    mostrarProductos(filtrar, rows, current_page)
+    setupPagination(filtrar, pagination, rows);
+}
+
+
+
+
+//paginacion 
+let current_page = 1;
+let rows= 8;
+let pagination = document.querySelector(".pagination")
+
+function setupPagination(array, wrapper, rows_per_page){
+    wrapper.innerHTML = "";
+
+    let page_count = Math.ceil(array.length / rows_per_page);
+	for (let i = 1; i < page_count + 1; i++) {
+		let btn = PaginationButton(i, array);
+		wrapper.appendChild(btn);
+	}
+}
+
+function PaginationButton (page, array) {
+	let button = document.createElement('button');
+	button.innerText = page;
+
+	if (current_page == page) button.classList.add('active');
+
+	button.addEventListener('click', function () {
+		current_page = page;
+
+        mostrarProductos(array, rows, current_page)
+
+		let current_btn = document.querySelector('.pagination button.active');
+		current_btn.classList.remove('active');
+
+		button.classList.add('active');
+	});
+
+	return button;
+}
+
+
 
 
 //async await
-async function mostrarProductos(array){
+function mostrarProductos(array, rows_per_page, page){
+    page --;
+
+    let start = rows_per_page * page;
+	let end = start + rows_per_page;
+	let paginatedItems = array.slice(start, end);
+
     if(contenedorProductos){
-        if(array !== undefined){
+        if(paginatedItems !== undefined){
             if(contenedorProductos){
                 contenedorProductos.innerHTML=""
-                for (const el of array) {
+                for (const el of paginatedItems) {
                     let div = document.createElement("div");
                     div.className = "producto card-color m-3"
                     div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
@@ -130,42 +171,29 @@ async function mostrarProductos(array){
                     btnAgregar.addEventListener("click", () =>{
                         agregarAlStorage(el.id);
                     })
+
+                    
                 }
+                
             }
-        }else{
-            let stockProductos = await traerDatos()
-            contenedorProductos.innerHTML=""
-                for (const el of stockProductos) {
-                    let div = document.createElement("div");
-                    div.className = "producto card-color m-3"
-                    div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
-                                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                        <h2 class="card-title">${el.nombre}</h2>
-                                        <p class="card-text">${el.precio}</p>
-                                        <p>${el.talle}</p>
-                                        <a id="boton${el.id}" class="btn boton">Agregar</a>
-                                    </div>`;
-                    
-                    contenedorProductos.appendChild(div)
-    
-                    let btnAgregar = document.getElementById(`boton${el.id}`)
-    
-                    btnAgregar.addEventListener("click", () =>{
-                        console.log(el.id);
-                        agregarAlStorage(el.id);
-                    })
-                }
+
+            
         }
+        
     }else{
         false
     }
     
     
-    
-    
 }
-mostrarProductos()
 
+async function mostrarProductosAsync (){
+    let stockProductos = await traerDatos()
+    mostrarProductos(stockProductos, rows, current_page)
+    setupPagination(stockProductos, pagination, rows);
+}
+
+mostrarProductosAsync()
 
 
 contenedorCarrito.addEventListener("click", (e)=>{
@@ -360,6 +388,58 @@ suCompraContenedor ? suCompraContenedor.addEventListener("click", (e)=>{
 
     
 }) : false
+
+
+
+function validarCompra (){
+    const nombre = document.getElementById("nombre").value;
+    const direccion = document.getElementById("direccion").value;
+    const tarjeta = document.getElementById("tarjeta-credito").value ;
+    const nombreTitular = document.getElementById("nombre-titular").value;
+    const mesVenc = document.getElementById("mes-venc").value;
+    const anioVenc = document.getElementById("año-venc").value;
+    const cvv = document.getElementById("cvv").value;
+
+    if(nombre === "" ){
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Por favor introduzca su nombre',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }else if (direccion === ""){
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Por favor introduzca su direccion',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }else if(tarjeta === "" || nombreTitular === "" || mesVenc === "" || anioVenc === "" || cvv === ""){
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Por favor llene todos los casilleros del método de pago',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }else{
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Compra realizada con éxito',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+}
+
+let btnComprar = document.getElementById("btn-comprar")
+btnComprar.addEventListener("click", () => {
+    validarCompra()
+    
+})
 
 //login-signup
 userActivo === null ?

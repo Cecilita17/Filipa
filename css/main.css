@@ -982,7 +982,7 @@ header nav a img{
   align-items: center;
   justify-content: flex-start;
   background-color: white;
-  height: 700px ;
+  height: 580px ;
   position: absolute;
   top: 17px
 }
@@ -1061,7 +1061,7 @@ header nav a img{
   justify-content: start;
   align-items: flex-start;
   width: 550px;
-  height: 680px;
+  height: 580px;
   background-color: white;
   
 }
@@ -1091,7 +1091,7 @@ header nav a img{
   
 }
 .tab-content--active > div input{
-  height: 45px;
+  height: 25px;
   margin-top: 2%;
   font-size: 1.2rem;
   border: 1px solid rgb(180, 178, 178);
@@ -1105,6 +1105,7 @@ header nav a img{
 .tab-content--active .group .boton{
   position: absolute;
   bottom: 0;
+  height: 40px;
 }
 
 .tab-content--active > .divGroup{
@@ -1118,6 +1119,42 @@ header nav a img{
   width: 200px;
 }
 
+/* PAGINATION */
+.pagination {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.pagination  button {
+	width: 35px;
+	height: 35px;
+
+	appearance: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+
+	background-color: rgb(205, 157, 157);
+
+	margin: 5px;
+	transition: 0.4s;
+
+	color: #FFF;
+	font-size: 18px;
+	text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pagination  button:hover {
+	background-color: rgb(170, 96, 96);
+}
+
+.pagination  button.active {
+	background-color:rgb(170, 96, 96) ;
+	box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
+}
 
 /*FOOTER*/
 .footer{
