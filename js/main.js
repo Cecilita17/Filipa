@@ -267,7 +267,6 @@ function agregarAlCarrito (){
 
         typeof JSON.parse(localStorage.getItem(key)) === "object" && key !== 'usuarios' && key !== 'userActivo'  ? carritoCompras.push(JSON.parse(localStorage.getItem(key))): false
 
-        /* key !== "dato" && carritoCompras.push(JSON.parse(localStorage.getItem(key))) */
     }
     
     mostrarCarrito()
@@ -436,10 +435,11 @@ function validarCompra (){
 }
 
 let btnComprar = document.getElementById("btn-comprar")
-btnComprar.addEventListener("click", () => {
+
+btnComprar ? btnComprar.addEventListener("click", () => {
     validarCompra()
     
-})
+}) : false 
 
 //login-signup
 userActivo === null ?
