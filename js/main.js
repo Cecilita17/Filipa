@@ -1,6 +1,6 @@
+import { traerDatos } from "../bd/bd.js";
 let carritoCompras = [];
 
-import { traerDatos } from "../bd/bd.js";
 const contenedorProductos = document.getElementById("contenedor-productos");
 const contenedorCarrito = document.getElementById("carrito-contenedor")
 const dropdawn = document.getElementById('dropdown')
@@ -9,15 +9,16 @@ const divPagar = document.getElementById("divPagar")
 const contadorCarrito = document.getElementById('contador-carrito');
 const precioTotal = document.getElementById('precioTotal');
 const suCompraContenedor = document.getElementById("su-compra-contenedor")
+const btnComprar = document.getElementById("btn-comprar")
 
-/* let stockProductos = await traerDatos() */
+let stockProductos = await traerDatos()
 let userActivo = JSON.parse(localStorage.getItem('userActivo'))
 
 window.addEventListener("DOMContentLoaded", agregarAlCarrito)
 
 //filtro radio
 const myFunction = async() =>{
-    let stockProductos = await traerDatos()
+    
     let talle = document.querySelectorAll('[name="talle"]');
     console.log(talle);
 
@@ -69,7 +70,7 @@ if (slider1) {
 
 
 const validarFormRange = async(e) =>{
-    let stockProductos = await traerDatos()
+    
     e.preventDefault()
     let valorMin = slider1.value;
     let valorMax = slider2.value;
@@ -93,8 +94,8 @@ lupa.addEventListener("click", () => {
     filtrarBusqueda (buscar)
 })
 
-const filtrarBusqueda = async(buscar) =>{    
-    let stockProductos = await traerDatos()
+const filtrarBusqueda = async(buscar) =>{ 
+       
     let filtrar = stockProductos.filter((el) => el.nombre.includes(buscar));
     mostrarProductos(filtrar, rows, current_page)
     setupPagination(filtrar, pagination, rows);
@@ -188,7 +189,7 @@ function mostrarProductos(array, rows_per_page, page){
 }
 
 async function mostrarProductosAsync (){
-    let stockProductos = await traerDatos()
+    
     mostrarProductos(stockProductos, rows, current_page)
     setupPagination(stockProductos, pagination, rows);
 }
@@ -223,7 +224,7 @@ contenedorCarrito.addEventListener("click", (e)=>{
 })
 
 const borrarProducto = async(id) =>{
-    let stockProductos = await traerDatos()
+    
     let productoBorrar = JSON.parse(localStorage.getItem(id))
     let productoOriginal = stockProductos.find(producto => producto.id === parseInt(id))
 
@@ -241,7 +242,7 @@ const borrarProducto = async(id) =>{
 }
 
 const agregarAlStorage = async(id) => {
-    let stockProductos = await traerDatos()
+    
     let productoAgregar = stockProductos.find(ele => ele.id ===parseInt(id))
     let productoStorage = JSON.parse(localStorage.getItem(id))
 
@@ -332,15 +333,13 @@ function actualizarTotalesCarrito(){
 }
 
 
-
 //Envio y pago tabs
 function setUpTabs() {
     
     document.querySelectorAll(".tab-button").forEach(button =>{
         button.addEventListener("click", ()=> {
-            
-            const tabsContainer = button.parentElement;
-            const envioPago = tabsContainer.parentElement
+            const envioPago = document.getElementById("envio-pago");
+            const tabsContainer = document.getElementById("tabs-container");
             const tabNumber = button.dataset.forTab;
             const tabToActivate = envioPago.querySelector(`.tab-content[data-tab="${tabNumber}"]`);
 
@@ -390,16 +389,18 @@ suCompraContenedor ? suCompraContenedor.addEventListener("click", (e)=>{
 
 
 
+
 function validarCompra (){
     const nombre = document.getElementById("nombre").value;
     const direccion = document.getElementById("direccion").value;
+    const email = document.getElementById("email-envio").value;
     const tarjeta = document.getElementById("tarjeta-credito").value ;
     const nombreTitular = document.getElementById("nombre-titular").value;
     const mesVenc = document.getElementById("mes-venc").value;
     const anioVenc = document.getElementById("año-venc").value;
     const cvv = document.getElementById("cvv").value;
 
-    if(nombre === "" ){
+    /* if(nombre === "" ){
         Swal.fire({
             position: 'center',
             icon: 'error',
@@ -431,15 +432,76 @@ function validarCompra (){
             showConfirmButton: false,
             timer: 1500
         })
-    }
-}
+        setTimeout(() => {
+            window.location.href = "./final.html"
+        }, 1500);
+    } */
 
-let btnComprar = document.getElementById("btn-comprar")
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Pago realizado con éxito',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    setTimeout(() => {
+        window.location.href = "./final.html"
+    }, 1500);
+
+    enviarEmail()
+
+    //porque no me funciona esto?
+    /* localStorage.removeItem(`${id}`, JSON.stringify(productoStorage)) */
+
+    localStorage.clear()
+    agregarAlCarrito()
+} 
+
+//enviar email
+
+function enviarEmail(){
+    const nombre = document.getElementById("nombre").value;
+    const email = document.getElementById("email-envio").value;
+    let templateParams = {
+        from_name: "Filipa",
+        to_name: `${nombre}`,
+        to_email: `${email}`,
+        message: `<div>
+                    ${carritoCompras.map((producto) => (
+                        `<div class="divCarrito">
+                            <img src="${producto.img}" class="imgCarrito mt-2 card-img-top" alt="...">
+                            <div class="divCarritoLadoImagen">
+                                <p class="productoNombre"> ${producto.nombre}</p>
+                                <div>
+                                    <p>Precio: $${producto.precio}</p>
+                                    <p>Cantidad: ${producto.cantidad}</p>
+                                </div>
+                            </div>
+                            <div><hr></div>
+                        </div>`
+                    ))}
+                </div>
+                `
+        ,
+        
+        precio_total: `${precioTotal.innerHTML}`,
+    }
+
+    emailjs.init("B1LuVOTU6IpIMo9s-");
+    emailjs.send('service_7xw550e', 'template_xi6hrer', templateParams)
+    .then(function(response) {
+       console.log('SUCCESS!', response.status, response.text);
+    }, function(error) {
+       console.log('FAILED...', error);
+    });
+} 
 
 btnComprar ? btnComprar.addEventListener("click", () => {
-    validarCompra()
+    validarCompra() 
+    
     
 }) : false 
+
 
 //login-signup
 userActivo === null ?
@@ -472,3 +534,5 @@ dropdawn.addEventListener("click", (e) => {
         }, 1500);
     }
 })
+
+agregarAlCarrito()

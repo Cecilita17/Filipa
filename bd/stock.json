@@ -5,15 +5,15 @@
       "tipo":"sweater",
       "precio":1200,
       "talle":"L",
-      "img":"/img/1.png"
-   },
+      "img":"https://drive.google.com/uc?&export=download&id=1upbha7bQLumj2SyaLvql_hAPLeEquqSv"
+   }, 
    {
       "id":2,
       "nombre":"sweater anna",
       "tipo":"sweater",
       "precio":1200,
       "talle":"M",
-      "img":"/img/1.png"
+      "img":"https://drive.google.com/uc?&export=download&id=1upbha7bQLumj2SyaLvql_hAPLeEquqSv"
    },
    {
       "id":3,
@@ -21,7 +21,7 @@
       "tipo":"sweater",
       "precio":1200,
       "talle":"S",
-      "img":"/img/1.png"
+      "img":"https://drive.google.com/uc?&export=download&id=1upbha7bQLumj2SyaLvql_hAPLeEquqSv"
    },
    {
       "id":4,
@@ -29,7 +29,7 @@
       "tipo":"sweater",
       "precio":850,
       "talle":"L",
-      "img":"/img/2.png"
+      "img":"https://drive.google.com/uc?&export=download&id=1oMdwgXCJ5Ffho3DmCzltSTyfFKXHPgSa"
    },
    {
       "id":5,
@@ -37,7 +37,7 @@
       "tipo":"sweater",
       "precio":850,
       "talle":"M",
-      "img":"/img/2.png"
+      "img":"https://drive.google.com/uc?&export=download&id=1oMdwgXCJ5Ffho3DmCzltSTyfFKXHPgSa"
    },
    {
        "id":6,
@@ -45,7 +45,7 @@
        "tipo":"sweater",
        "precio":850,
        "talle":"S",
-       "img":"/img/2.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1oMdwgXCJ5Ffho3DmCzltSTyfFKXHPgSa"
     },
     {
        "id":7,
@@ -53,7 +53,7 @@
        "tipo":"sweater",
        "precio":900,
        "talle":"L",
-       "img":"/img/3.png"
+       "img":"https://drive.google.com/uc?&export=download&id=12tbG6qGOzCgcucd503u3tE3nv_8EcD1V"
     },
     {
        "id":8,
@@ -61,7 +61,7 @@
        "tipo":"sweater",
        "precio":900,
        "talle":"M",
-       "img":"/img/3.png"
+       "img":"https://drive.google.com/uc?&export=download&id=12tbG6qGOzCgcucd503u3tE3nv_8EcD1V"
     },
     {
        "id":9,
@@ -69,7 +69,7 @@
        "tipo":"sweater",
        "precio":900,
        "talle":"S",
-       "img":"/img/3.png"
+       "img":"https://drive.google.com/uc?&export=download&id=12tbG6qGOzCgcucd503u3tE3nv_8EcD1V"
     },
     {
        "id":10,
@@ -77,7 +77,7 @@
        "tipo":"campera",
        "precio":1500,
        "talle":"L",
-       "img":"/img/5.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1o4wAECNa8mgVbB56VsqIIU47GLWhsrhP"
     },
     {
        "id":11,
@@ -85,7 +85,7 @@
        "tipo":"campera",
        "precio":1500,
        "talle":"M",
-       "img":"/img/5.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1o4wAECNa8mgVbB56VsqIIU47GLWhsrhP"
     },
     {
        "id":12,
@@ -93,7 +93,7 @@
        "tipo":"campera",
        "precio":1500,
        "talle":"S",
-       "img":"/img/5.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1o4wAECNa8mgVbB56VsqIIU47GLWhsrhP"
     },
     {
        "id":13,
@@ -101,7 +101,7 @@
        "tipo":"campera",
        "precio":3500,
        "talle":"L",
-       "img":"/img/6.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1OSDHxMa-1Def963PU3nNZRzJ798ZmQRn"
     },
     {
        "id":14,
@@ -109,7 +109,7 @@
        "tipo":"campera",
        "precio":3500,
        "talle":"M",
-       "img":"/img/6.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1OSDHxMa-1Def963PU3nNZRzJ798ZmQRn"
     },
     {
        "id":15,
@@ -117,7 +117,7 @@
        "tipo":"campera",
        "precio":3500,
        "talle":"S",
-       "img":"/img/6.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1OSDHxMa-1Def963PU3nNZRzJ798ZmQRn"
     },
     {
        "id":16,
@@ -125,7 +125,7 @@
        "tipo":"campera",
        "precio":5700,
        "talle":"L",
-       "img":"/img/7.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1pXcWWVAcdVSBxp_hiKIsd03XZ9AbBoSU"
     },
     {
        "id":17,
@@ -133,7 +133,7 @@
        "tipo":"campera",
        "precio":5700,
        "talle":"M",
-       "img":"/img/7.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1pXcWWVAcdVSBxp_hiKIsd03XZ9AbBoSU"
     },
     {
        "id":18,
@@ -141,7 +141,7 @@
        "tipo":"campera",
        "precio":5700,
        "talle":"S",
-       "img":"img/7.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1pXcWWVAcdVSBxp_hiKIsd03XZ9AbBoSU"
     },
     {
        "id":19,
@@ -149,7 +149,7 @@
        "tipo":"campera",
        "precio":3500,
        "talle":"L",
-       "img":"/img/9.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1SiKfFhtRp1u23rGPKEuneP0W1RuUSJo_"
     },
     {
        "id":20,
@@ -157,7 +157,7 @@
        "tipo":"campera",
        "precio":3500,
        "talle":"M",
-       "img":"/img/9.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1SiKfFhtRp1u23rGPKEuneP0W1RuUSJo_"
     },
     {
        "id":21,
@@ -165,7 +165,7 @@
        "tipo":"campera",
        "precio":3500,
        "talle":"S",
-       "img":"/img/9.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1SiKfFhtRp1u23rGPKEuneP0W1RuUSJo_"
     },
     {
        "id":22,
@@ -173,7 +173,7 @@
        "tipo":"jean",
        "precio":3400,
        "talle":"L",
-       "img":"/img/10.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1SsZ1-XrA1mAqAYZ4QbKFAsSMi5r1Yxbj"
     },
     {
        "id":23,
@@ -181,7 +181,7 @@
        "tipo":"jean",
        "precio":3400,
        "talle":"M",
-       "img":"/img/10.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1SsZ1-XrA1mAqAYZ4QbKFAsSMi5r1Yxbj"
     },
     {
        "id":24,
@@ -189,7 +189,7 @@
        "tipo":"jean",
        "precio":3400,
        "talle":"S",
-       "img":"/img/10.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1SsZ1-XrA1mAqAYZ4QbKFAsSMi5r1Yxbj"
     },
     {
        "id":25,
@@ -197,7 +197,7 @@
        "tipo":"jean",
        "precio":4000,
        "talle":"L",
-       "img":"/img/11.png"
+       "img":"https://drive.google.com/uc?&export=download&id=18l_NA0BgnwJ7-iL5ywsEjDbTLgdGwO0h"
     },
     {
        "id":26,
@@ -205,7 +205,7 @@
        "tipo":"jean",
        "precio":4000,
        "talle":"M",
-       "img":"/img/11.png"
+       "img":"https://drive.google.com/uc?&export=download&id=18l_NA0BgnwJ7-iL5ywsEjDbTLgdGwO0h"
     },
     {
        "id":27,
@@ -213,7 +213,7 @@
        "tipo":"jean",
        "precio":4000,
        "talle":"S",
-       "img":"/img/11.png"
+       "img":"https://drive.google.com/uc?&export=download&id=18l_NA0BgnwJ7-iL5ywsEjDbTLgdGwO0h"
     },
     {
        "id":28,
@@ -221,7 +221,7 @@
        "tipo":"jean",
        "precio":4700,
        "talle":"L",
-       "img":"/img/12.png"
+       "img":"https://drive.google.com/uc?&export=download&id=13RO-694ZwebiFa2EgYfgUyZtyDVoSDGn"
     },
     {
        "id":29,
@@ -229,7 +229,7 @@
        "tipo":"jean",
        "precio":4700,
        "talle":"M",
-       "img":"/img/12.png"
+       "img":"https://drive.google.com/uc?&export=download&id=13RO-694ZwebiFa2EgYfgUyZtyDVoSDGn"
     },
     {
        "id":30,
@@ -237,7 +237,7 @@
        "tipo":"jean",
        "precio":4700,
        "talle":"S",
-       "img":"/img/12.png"
+       "img":"https://drive.google.com/uc?&export=download&id=13RO-694ZwebiFa2EgYfgUyZtyDVoSDGn"
     },
     {
        "id":31,
@@ -245,7 +245,7 @@
        "tipo":"jean",
        "precio":3800,
        "talle":"L",
-       "img":"/img/13.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1CsESat4Fk92m_POZ_yOFGTxNaSKrZW7k"
     },
     {
        "id":32,
@@ -253,7 +253,7 @@
        "tipo":"jean",
        "precio":3800,
        "talle":"M",
-       "img":"/img/13.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1CsESat4Fk92m_POZ_yOFGTxNaSKrZW7k"
     },
     {
        "id":33,
@@ -261,6 +261,6 @@
        "tipo":"jean",
        "precio":3800,
        "talle":"S",
-       "img":"/img/13.png"
+       "img":"https://drive.google.com/uc?&export=download&id=1CsESat4Fk92m_POZ_yOFGTxNaSKrZW7k"
     }
  ]
