@@ -14,8 +14,6 @@ const btnComprar = document.getElementById("btn-comprar")
 let stockProductos = await traerDatos()
 let userActivo = JSON.parse(localStorage.getItem('userActivo'))
 
-window.addEventListener("DOMContentLoaded", agregarAlCarrito)
-
 //filtro radio
 const myFunction = async() =>{
     
@@ -48,8 +46,6 @@ if(form){
     form.addEventListener("submit", validarFormulario) 
 }
 
-
-
 //filtro rangeSlider
 const slider2 = document.getElementById("slider2");
 const slider1 = document.getElementById("slider1");
@@ -68,7 +64,6 @@ if (slider1) {
     })
 }
 
-
 const validarFormRange = async(e) =>{
     
     e.preventDefault()
@@ -84,8 +79,6 @@ if(formRange){
     formRange.addEventListener("submit", validarFormRange )
 }
 
-
-
 //buscador 
 const lupa = document.getElementById("lupa");
 
@@ -100,9 +93,6 @@ const filtrarBusqueda = async(buscar) =>{
     mostrarProductos(filtrar, rows, current_page)
     setupPagination(filtrar, pagination, rows);
 }
-
-
-
 
 //paginacion 
 let current_page = 1;
@@ -139,9 +129,6 @@ function PaginationButton (page, array) {
 	return button;
 }
 
-
-
-
 //async await
 function mostrarProductos(array, rows_per_page, page){
     page --;
@@ -172,20 +159,12 @@ function mostrarProductos(array, rows_per_page, page){
                     btnAgregar.addEventListener("click", () =>{
                         agregarAlStorage(el.id);
                     })
-
-                    
                 }
-                
             }
-
-            
         }
-        
     }else{
         false
     }
-    
-    
 }
 
 async function mostrarProductosAsync (){
@@ -195,7 +174,6 @@ async function mostrarProductosAsync (){
 }
 
 mostrarProductosAsync()
-
 
 contenedorCarrito.addEventListener("click", (e)=>{
     if(e.target.id === "eliminar"){
@@ -217,14 +195,9 @@ contenedorCarrito.addEventListener("click", (e)=>{
             onClick: function(){} // Callback after click
           }).showToast();
     }
-
-    
-    
-
 })
 
 const borrarProducto = async(id) =>{
-    
     let productoBorrar = JSON.parse(localStorage.getItem(id))
     let productoOriginal = stockProductos.find(producto => producto.id === parseInt(id))
 
@@ -238,24 +211,18 @@ const borrarProducto = async(id) =>{
         divPagar.innerHTML = ""
         agregarAlCarrito()
     }
-
 }
 
 const agregarAlStorage = async(id) => {
-    
     let productoAgregar = stockProductos.find(ele => ele.id ===parseInt(id))
     let productoStorage = JSON.parse(localStorage.getItem(id))
 
     if(productoStorage === null){
         localStorage.setItem(`${id}`, JSON.stringify({...productoAgregar, cantidad:1}))
-        
-
-        
     }else{
         productoStorage.cantidad = productoStorage.cantidad + 1 
         productoStorage.precio = productoStorage.precio + productoAgregar.precio
         localStorage.setItem(`${id}`, JSON.stringify(productoStorage))
-        
     }
     agregarAlCarrito()
 }
@@ -267,12 +234,9 @@ function agregarAlCarrito (){
         let key = localStorage.key(index)
 
         typeof JSON.parse(localStorage.getItem(key)) === "object" && key !== 'usuarios' && key !== 'userActivo'  ? carritoCompras.push(JSON.parse(localStorage.getItem(key))): false
-
     }
-    
     mostrarCarrito()
     actualizarTotalesCarrito()
-    
 }
 
 const mostrarCarrito = () => {
@@ -310,9 +274,7 @@ const mostrarCarrito = () => {
                                 </div>`
         : false
     })
-    
 }
-
 
 function actualizarTotalesCarrito(){
     if (carritoCompras.length > 0) {
@@ -326,10 +288,7 @@ function actualizarTotalesCarrito(){
                                     <p> Tu carrito de compras está vacío </p>
                                      <a href="./index.html"> Volver a la tienda</a>
                                 </div>`
-        
     }
-    
-
 }
 
 
@@ -343,7 +302,6 @@ function setUpTabs() {
             const tabNumber = button.dataset.forTab;
             const tabToActivate = envioPago.querySelector(`.tab-content[data-tab="${tabNumber}"]`);
 
-
             tabsContainer.querySelectorAll(".tab-button").forEach(button => {
                 button.classList.remove("tab-button--active")
             })
@@ -355,7 +313,6 @@ function setUpTabs() {
             button.classList.add("tab-button--active")
             tabToActivate.classList.add("tab-content--active")
         })
-
     })
 }
 
@@ -383,12 +340,7 @@ suCompraContenedor ? suCompraContenedor.addEventListener("click", (e)=>{
             onClick: function(){} // Callback after click
           }).showToast();
     }
-
-    
 }) : false
-
-
-
 
 function validarCompra (){
     const nombre = document.getElementById("nombre").value;
@@ -400,11 +352,19 @@ function validarCompra (){
     const anioVenc = document.getElementById("año-venc").value;
     const cvv = document.getElementById("cvv").value;
 
-    /* if(nombre === "" ){
+    if(nombre === "" ){
         Swal.fire({
             position: 'center',
             icon: 'error',
             title: 'Por favor introduzca su nombre',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }else if (email === ""){
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Por favor introduzca su email',
             showConfirmButton: false,
             timer: 1500
         })
@@ -428,37 +388,25 @@ function validarCompra (){
         Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Compra realizada con éxito',
+            title: 'Pago realizado con éxito',
             showConfirmButton: false,
             timer: 1500
         })
         setTimeout(() => {
             window.location.href = "./final.html"
         }, 1500);
-    } */
 
-    Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Pago realizado con éxito',
-        showConfirmButton: false,
-        timer: 1500
-    })
-    setTimeout(() => {
-        window.location.href = "./final.html"
-    }, 1500);
+        enviarEmail()
 
-    enviarEmail()
+        //porque no me funciona esto?
+        /* localStorage.removeItem(`${id}`, JSON.stringify(productoStorage)) */
 
-    //porque no me funciona esto?
-    /* localStorage.removeItem(`${id}`, JSON.stringify(productoStorage)) */
-
-    localStorage.clear()
-    agregarAlCarrito()
+        localStorage.clear()
+        agregarAlCarrito()
+    }
 } 
 
 //enviar email
-
 function enviarEmail(){
     const nombre = document.getElementById("nombre").value;
     const email = document.getElementById("email-envio").value;
@@ -483,7 +431,6 @@ function enviarEmail(){
                 </div>
                 `
         ,
-        
         precio_total: `${precioTotal.innerHTML}`,
     }
 
@@ -498,10 +445,7 @@ function enviarEmail(){
 
 btnComprar ? btnComprar.addEventListener("click", () => {
     validarCompra() 
-    
-    
 }) : false 
-
 
 //login-signup
 userActivo === null ?
@@ -535,4 +479,4 @@ dropdawn.addEventListener("click", (e) => {
     }
 })
 
-agregarAlCarrito()
+window.addEventListener("DOMContentLoaded", agregarAlCarrito(), setUpTabs())
