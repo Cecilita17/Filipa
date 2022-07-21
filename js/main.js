@@ -60,6 +60,7 @@ if(slider2){
 
 if (slider1) {
     slider1.addEventListener("input",(e)=>{
+        console.log(e);
         outputMin.innerHTML = e.target.value;
     })
 }
@@ -147,8 +148,8 @@ function mostrarProductos(array, rows_per_page, page){
                     div.innerHTML = `<img src="${el.img}" class="mt-2 card-img-top" alt="...">
                                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                         <h2 class="card-title">${el.nombre}</h2>
-                                        <p class="card-text">${el.precio}</p>
-                                        <p>${el.talle}</p>
+                                        <p>Talle: ${el.talle}</p>
+                                        <p class="card-text"> ARS ${el.precio}</p>
                                         <a id="boton${el.id}" class="btn boton">Agregar</a>
                                     </div>`;
                     

@@ -5,7 +5,7 @@
       "tipo":"sweater",
       "precio":1200,
       "talle":"L",
-      "img":"https://drive.google.com/uc?&export=download&id=1upbha7bQLumj2SyaLvql_hAPLeEquqSv"
+      "img":"https://drive.google.com/uc?&export=download&id=1WbAnZXWPZI8nWxxChMr2-Xn2hZpIUecF"
    }, 
    {
       "id":2,
@@ -13,7 +13,7 @@
       "tipo":"sweater",
       "precio":1200,
       "talle":"M",
-      "img":"https://drive.google.com/uc?&export=download&id=1upbha7bQLumj2SyaLvql_hAPLeEquqSv"
+      "img":"https://drive.google.com/uc?&export=download&id=1WbAnZXWPZI8nWxxChMr2-Xn2hZpIUecF"
    },
    {
       "id":3,
@@ -21,7 +21,7 @@
       "tipo":"sweater",
       "precio":1200,
       "talle":"S",
-      "img":"https://drive.google.com/uc?&export=download&id=1upbha7bQLumj2SyaLvql_hAPLeEquqSv"
+      "img":"https://drive.google.com/uc?&export=download&id=1WbAnZXWPZI8nWxxChMr2-Xn2hZpIUecF"
    },
    {
       "id":4,
@@ -149,7 +149,7 @@
        "tipo":"campera",
        "precio":3500,
        "talle":"L",
-       "img":"https://drive.google.com/uc?&export=download&id=1SiKfFhtRp1u23rGPKEuneP0W1RuUSJo_"
+       "img":"https://drive.google.com/uc?&export=download&id=1HUcPjc-1nmoZn5IPOy_nmReuHs_GjPcL"
     },
     {
        "id":20,
@@ -157,7 +157,7 @@
        "tipo":"campera",
        "precio":3500,
        "talle":"M",
-       "img":"https://drive.google.com/uc?&export=download&id=1SiKfFhtRp1u23rGPKEuneP0W1RuUSJo_"
+       "img":"https://drive.google.com/uc?&export=download&id=1HUcPjc-1nmoZn5IPOy_nmReuHs_GjPcL"
     },
     {
        "id":21,
@@ -165,7 +165,7 @@
        "tipo":"campera",
        "precio":3500,
        "talle":"S",
-       "img":"https://drive.google.com/uc?&export=download&id=1SiKfFhtRp1u23rGPKEuneP0W1RuUSJo_"
+       "img":"https://drive.google.com/uc?&export=download&id=1HUcPjc-1nmoZn5IPOy_nmReuHs_GjPcL"
     },
     {
        "id":22,

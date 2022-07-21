@@ -13,7 +13,7 @@
 }
 ::-webkit-scrollbar-thumb{
   border-radius: 5px;
-  background-color: rgb(170, 96, 96) ;
+  background-color:  rgb(71, 71, 71) ;
 }
 
 body{
@@ -273,7 +273,7 @@ body{
     justify-content: space-between ;
     position: relative;
     background-color: white;
-    border: 1px solid rgb(170, 96, 96);
+    border: 1px solid  black;
     min-width: 350px !important;
     padding: 20px;
     margin-top: -100%;
@@ -300,7 +300,7 @@ body{
     top: 15px;
     right: 15px;
     font-size: 20px;
-    color: rgb(170, 96, 96);
+    color:  black;
     border: none;
     background-color: white;
   }
@@ -411,7 +411,7 @@ body{
 .tab-button--active{
   width: 50%;
   height: 25px;
-  background-color: rgb(170, 96, 96);
+  background-color:  black;
   color: black;
   
 }
@@ -595,7 +595,7 @@ header nav a img{
   justify-content: space-between ;
   position: relative;
   background-color: white;
-  border: 1px solid rgb(225, 76, 65);
+ 
   min-width: 500px;
   min-height: 300px;
   padding: 20px;
@@ -632,7 +632,7 @@ header nav a img{
 }
 
 .modal-carrito h3 {
-  color: rgb(170, 96, 96);
+  color:  black;
   font-size: 2rem;
   padding-bottom: 5px;
   padding-top: 2%;
@@ -643,7 +643,7 @@ header nav a img{
   top: 15px;
   right: 15px;
   font-size: 20px;
-  color: rgb(170, 96, 96);
+  color:  black;
   border: none;
   background-color: white;
 }
@@ -751,8 +751,8 @@ header nav a img{
 
 /* segundo nav */
 .navBajo{
-  background-color: rgb(170, 96, 96);
-  height: auto;
+  background-color: black;
+  height: 45px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -761,11 +761,11 @@ header nav a img{
 }
 /* Dropdown Button */
 .dropbtn {
-  background-color: rgb(170, 96, 96);
+  font-size: 0.9rem !important;
+  background-color: black;
   color: white;
   text-shadow: 2px 2px 12px #250F0B;
-  margin-right: 25px;
-  margin-left: 25px;
+  margin-inline: 25px;
   margin-bottom: 10px;
   margin-top: 10px;
   font-size: 16px;
@@ -781,9 +781,11 @@ header nav a img{
 .dropdown {
   position: relative;
   display: inline-block;
+  font-size: 1rem;
   
 }
 .dropbtn:hover{
+  margin-bottom: 7px;
   border-bottom: 3px solid white;
   }
 
@@ -814,7 +816,7 @@ header nav a img{
 .bgImage{
   grid-area: bground;
   height: 600px;
-  background-image: url(../img/OTOÑOINVIERNO.png) ;
+  background-image: url(../img/otoñoinvier.png) ;
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -832,7 +834,7 @@ header nav a img{
   padding-left: 15px;
   padding-right: 15px;
   margin-bottom: 50px;
-  background-color: rgb(172, 117, 117);
+  background-color:  black;
   font-weight: 500;
   font-size: 2rem;
   color: white;
@@ -894,7 +896,7 @@ header nav a img{
     height: 10px;
     cursor: ew-resize;
     background: #434343;
-    box-shadow: -80px 0 0 80px rgb(170, 96, 96);
+    box-shadow: -80px 0 0 80px  black;
   }
 
 }
@@ -916,7 +918,7 @@ header nav a img{
 
 .titulo{
   color: black;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-family: ProximaNova,Helvetica,Arial,sans-serif;
   font-weight: 800;
   text-transform: uppercase;
@@ -940,21 +942,37 @@ header nav a img{
 
 /*galeria de imagenes*/
 .boton{
-  background-color: rgb(172, 117, 117) ;
+  background-color:  black ;
+  color: white;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-inline: 9px;
+  font-size: .8rem;
+  border-radius: 1rem;
 }
 .boton:hover{
-  background-color: rgb(170, 96, 96);
+  background-color:  black;
 }
 .card-title{
   margin-top: 10px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 700;
   font-family: ProximaNova,Helvetica,Arial,sans-serif;
   font-weight: 700;
   text-transform: uppercase;
 }
+.card-text{
+  font-weight: 700;
+  font-size: .9rem;
+}
+.card-body p{
+  margin-bottom: 3px;
+  padding-left: 0;
+  text-align: left;
+  font-size: .9rem;
+}
 .producto{
-  width: 16rem;
+  width: 14rem;
 }
 
 /* direccionPago.html*/
@@ -1052,7 +1070,7 @@ header nav a img{
   width: 50%;
   height: 50px;
   padding: 5px;
-  color: #979494;
+  color: black;
   background-color: white;
   border-top: none;
   border-left: none;
@@ -1062,8 +1080,8 @@ header nav a img{
 .tab-button--active{
   width: 50%;
   height: 50px;
-  background-color: rgb(170, 96, 96);
-  color: black;
+  background-color:  black;
+  color: white;
   
 }
 
@@ -1157,7 +1175,7 @@ header nav a img{
 	outline: none;
 	cursor: pointer;
 
-	background-color: rgb(205, 157, 157);
+	background-color:  rgb(51, 51, 51);
 
 	margin: 5px;
 	transition: 0.4s;
@@ -1169,11 +1187,11 @@ header nav a img{
 }
 
 .pagination  button:hover {
-	background-color: rgb(170, 96, 96);
+	background-color:  black;
 }
 
 .pagination  button.active {
-	background-color:rgb(170, 96, 96) ;
+	background-color: black ;
 	box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -1193,7 +1211,7 @@ header nav a img{
 /*FOOTER*/
 .footer{
   grid-area: footer;
-  background-color: rgb(172, 117, 117);
+  background-color:  black;
   height: auto;
   min-width: 100%;
   color: rgb(219, 216, 216);
@@ -1215,6 +1233,7 @@ header nav a img{
 
 h5{
   font-weight: 700;
+  color: rgb(219, 216, 216)
 }
 
 .color-color{
