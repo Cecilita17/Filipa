@@ -453,15 +453,11 @@ userActivo === null ?
 dropdawn.innerHTML = `<button class="dropbtn">Mi cuenta</button>
 <div class="dropdown-content ">
   <a href="./pages/iniSesion.html">Iniciar sesión</a>
-  <a href="#">Mi carrito</a>
-  <a href="#">Mis compras</a>
 </div>`
 :
 dropdawn.innerHTML = `<button class=" dropbtn">Bienvenido! ${userActivo.usuario}</button>
 <div class="dropdown-content ">
     <a id="cerrarSesion">Cerrar Sesion</a>
-    <a href="#">Novedades</a>
-    <a href="#">Contacto</a>
 </div> `
 
 dropdawn.addEventListener("click", (e) => {
