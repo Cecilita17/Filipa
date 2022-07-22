@@ -816,8 +816,8 @@ header nav a img{
 /* imagen abajo de menus*/
 .bgImage{
   grid-area: bground;
-  height: 600px;
-  background-image: url(../img/otoñoinvier.png) ;
+  height: 650px;
+  background-image: url(../img/otoñoinviern.png) ;
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -952,7 +952,9 @@ header nav a img{
   border-radius: 1rem;
 }
 .boton:hover{
-  background-color:  black;
+  background-color:  rgb(32, 32, 32);
+  color: white;
+  
 }
 .card-title{
   margin-top: 10px;
