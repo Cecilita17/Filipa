@@ -190,8 +190,8 @@ contenedorCarrito.addEventListener("click", (e)=>{
             position: "right", // `left`, `center` or `right`
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
-              background: "linear-gradient(to right, rgb(170, 96, 96), white,  rgb(170, 96, 96), white) ",
-              color: "black",
+              background: "linear-gradient(to right, black, grey,  black, grey) ",
+              color: "white",
             },
             onClick: function(){} // Callback after click
           }).showToast();

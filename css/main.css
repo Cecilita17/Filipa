@@ -92,7 +92,7 @@ body{
   header{
     background-color: white;
     position: fixed;
-    width: 100% !important;
+    width: 100% ;
     margin-right: 10px;
     -webkit-box-shadow: -1px 10px 42px -24px rgba(0,0,0,0.75);
     -moz-box-shadow: -1px 10px 42px -24px rgba(0,0,0,0.75);
@@ -101,8 +101,8 @@ body{
   .desktop2{
     position: fixed;
     inset: 0 0 0 25%;
-    background: rgb(172, 117, 117, 0.4) !important; 
-    backdrop-filter: blur(1rem) !important;
+    background: rgba(0, 0, 0, 0.4) !important; 
+    backdrop-filter: blur(1rem) ;
     flex-direction: column;
     align-items: flex-start !important;
     gap: 30px;
@@ -111,8 +111,8 @@ body{
     -moz-box-shadow: -1px 10px 42px -24px rgba(0,0,0,0.75);
     box-shadow: -1px 10px 42px -24px rgba(0,0,0,0.75);
     transition: transform 350ms ease-out;
-    transform: translateX(100%) ;
-    
+    transform: translateX(100%)  ;
+    height: 100% !important;
   }
   
   .desktop2 button i{
@@ -126,21 +126,21 @@ body{
   }
 
   .desktop1{
-    background-color: white !important;
+    background-color: white ;
     flex-wrap: nowrap;
     justify-content: center !important;
-    align-items: center !important;
+    align-items: center ;
     margin: 1%;
     padding: 1%;
     
   }
   .logo1{
     display: inline;
-    align-self: center !important;
+    align-self: center ;
     width: fit-content;
     margin-left: 1%;
-    padding: 5px;
-    margin: 0% !important;
+    padding: 5px !;
+    margin: 0% ;
     background-color: transparent !important;
     border: none;
   }
@@ -157,15 +157,15 @@ body{
   
   .buscar{
     
-    padding: none !important;
-    margin: none !important;
+    padding: none ;
+    margin: none ;
   }
   .buscar i{
     font-size: 20px !important;
   }
   .buscar-carrito{
     gap: 0px !important;
-    margin-right: 10px !important;
+    margin-right: 10px ;
     
   }
   .buscar-carrito i{
