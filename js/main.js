@@ -1,4 +1,4 @@
-import { traerDatos } from "../bd/bd.js";
+import { traerDatos } from "./bd.js";
 let carritoCompras = [];
 
 const contenedorProductos = document.getElementById("contenedor-productos");
